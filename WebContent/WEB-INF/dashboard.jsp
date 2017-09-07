@@ -9,7 +9,7 @@
 	</head>
 	<body>
 		<div id="login-container">
-			<h1>Hello ${user.firstName}</h1>
+			<h1>Hello ${user.firstName} ${user.birthdate}</h1>
 			There are currently ${liveUserCount} users connected to the platform.
 		</div>
 	</body>
