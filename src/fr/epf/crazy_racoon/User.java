@@ -14,17 +14,27 @@ public class User {
 	private Long id;
 	private String firstName;
 	private String lastName;
+	private String password;
 	private Date birthdate;
 	private String email;
 	
-	public User(String firstName, String lastName, Date birthdate, String email) {
+	public User(String firstName, String lastName, String password, Date birthdate, String email) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.birthdate = birthdate;
+		this.password = password;
 		this.email = email;
 	}	
 	
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	public String getFirstName() {
 		return firstName;
 	}
