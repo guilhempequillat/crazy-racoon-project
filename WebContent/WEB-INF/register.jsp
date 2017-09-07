@@ -19,7 +19,7 @@
 				<br/>
 				<input type="text" name="email" placeholder="Email"/>
 				<br/>
-				<input type="text" name="birthdate" placeholder="Birthdate"/>
+				<input type="date" name="birthdate" placeholder="Birthdate"/>
 				<br/>
 				<input type="submit" class="btn" value="Register"/>
 			</form>

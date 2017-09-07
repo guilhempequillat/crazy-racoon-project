@@ -2,8 +2,10 @@ package fr.epf.crazy_racoon;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -35,17 +37,27 @@ public class RegistrationServlet extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		User u = parseUser(req);
-		req.getSession().setAttribute("user", u);
-		incrementLiveUserCount();
-		userDao.save(u);
-		resp.sendRedirect("dashboard");
+		User u;
+		try {
+			u = parseUser(req);
+			req.getSession().setAttribute("user", u);
+			incrementLiveUserCount();
+			userDao.save(u);
+			resp.sendRedirect("dashboard");
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
-	private User parseUser(HttpServletRequest req) {
+	private User parseUser(HttpServletRequest req) throws ParseException {
 		String firstName = req.getParameter("firstName");
 		String lastName = req.getParameter("lastName");
-		return new User(firstName, lastName, "mdp", new Date(1994, 7, 17),"test@gmail.com");
+		String email = req.getParameter("email");
+		String password = req.getParameter("password");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date d = sdf.parse(req.getParameter("birthdate"));
+		return new User(firstName, lastName, password, d,email);
 	}
 	
 	private void incrementLiveUserCount() {
