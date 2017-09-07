@@ -15,6 +15,12 @@
 				<br/>
 				<input type="text" name="lastName" placeholder="Last Name"/>
 				<br/>
+				<input type="text" name="password" placeholder="password"/>
+				<br/>
+				<input type="text" name="email" placeholder="email"/>
+				<br/>
+				<input type="text" name="birthdate" placeholder="birthdate"/>
+				<br/>
 				<input type="submit" class="btn" value="Register"/>
 			</form>
 		</div>
