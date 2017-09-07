@@ -45,7 +45,7 @@ public class RegistrationServlet extends HttpServlet {
 	private User parseUser(HttpServletRequest req) {
 		String firstName = req.getParameter("firstName");
 		String lastName = req.getParameter("lastName");
-		return new User(firstName, lastName, new Date(1994, 7, 17),"test@gmail.com");
+		return new User(firstName, lastName, "mdp", new Date(1994, 7, 17),"test@gmail.com");
 	}
 	
 	private void incrementLiveUserCount() {
