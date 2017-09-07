@@ -1,5 +1,7 @@
 package fr.epf.crazy_racoon;
 
+import java.sql.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,15 +14,17 @@ public class User {
 	private Long id;
 	private String firstName;
 	private String lastName;
+	private Date birthdate;
+	private String email;
 	
-	public User() {
-	}
-	
-	public User(String firstName, String lastName) {
+	public User(String firstName, String lastName, Date birthdate, String email) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
+		this.birthdate = birthdate;
+		this.email = email;
 	}
+	
 	public String getFirstName() {
 		return firstName;
 	}
@@ -40,6 +44,22 @@ public class User {
 	
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public Date getBirthdate() {
+		return birthdate;
+	}
+
+	public void setBirthdate(Date birthdate) {
+		this.birthdate = birthdate;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	
 }
