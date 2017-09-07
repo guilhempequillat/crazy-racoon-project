@@ -39,7 +39,7 @@ public class RegistrationServlet extends HttpServlet {
 		req.getSession().setAttribute("user", u);
 		incrementLiveUserCount();
 		userDao.save(u);
-		resp.sendRedirect("dashboard-user");
+		resp.sendRedirect("dashboard");
 	}
 	
 	private User parseUser(HttpServletRequest req) {

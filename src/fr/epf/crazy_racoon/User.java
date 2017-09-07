@@ -23,9 +23,7 @@ public class User {
 		this.lastName = lastName;
 		this.birthdate = birthdate;
 		this.email = email;
-	}
-	
-	
+	}	
 	
 	public String getFirstName() {
 		return firstName;
