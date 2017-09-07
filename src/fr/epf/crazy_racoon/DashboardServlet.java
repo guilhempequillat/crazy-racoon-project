@@ -19,6 +19,6 @@ public class DashboardServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setAttribute("liveUserCount", getServletContext().getAttribute("liveUserCount"));
-		request.getRequestDispatcher("WEB-INF/dashBoard.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/dashboard.jsp").forward(request, response);
 	}
 }

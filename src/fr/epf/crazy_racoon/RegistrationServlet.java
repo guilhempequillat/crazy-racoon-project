@@ -2,6 +2,7 @@ package fr.epf.crazy_racoon;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,7 +45,7 @@ public class RegistrationServlet extends HttpServlet {
 	private User parseUser(HttpServletRequest req) {
 		String firstName = req.getParameter("firstName");
 		String lastName = req.getParameter("lastName");
-		return new User(firstName, lastName);
+		return new User(firstName, lastName, new Date(1994, 7, 17),"test@gmail.com");
 	}
 	
 	private void incrementLiveUserCount() {
