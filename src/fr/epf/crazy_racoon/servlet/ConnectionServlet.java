@@ -38,7 +38,6 @@ public class ConnectionServlet extends HttpServlet {
 		boolean find =false;
 		while(iterator.hasNext()&&find==false){
 			User u = iterator.next();
-			String userpsw =u.getPassword();
 			if(u.getPassword().equals(password)==true && u.getEmail().equals(email)==true){
 				if (u.getStatut()){
 					resp.sendRedirect("dashboard_admin");
@@ -55,18 +54,5 @@ public class ConnectionServlet extends HttpServlet {
 			req.getSession().setAttribute("connect", true);
 		}
 	}
-	
-	
-//	
-//	private User parseUser(HttpServletRequest req) throws ParseException {
-//		
-//		return new User(firstName, lastName, password, d,email);
-//	}
-	
-	private void incrementLiveUserCount() {
-		Integer liveUserCount = (Integer) getServletContext().getAttribute("liveUserCount");
-		getServletContext().setAttribute("liveUserCount", liveUserCount + 1);
-	}
-
 
 }
