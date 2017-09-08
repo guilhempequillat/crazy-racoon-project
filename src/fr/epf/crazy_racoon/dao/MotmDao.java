@@ -16,5 +16,4 @@ public class MotmDao {
 	public void save(Motm motm) {
 		em.persist(motm);
 	}
-	
 }
