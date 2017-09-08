@@ -10,16 +10,15 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class MotmSubmitServlet
  */
-@WebServlet("/motm-submit-servlet")
+@WebServlet("/motm-submit")
 public class MotmSubmitServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("WEB-INF/motm-submit-servlet.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/motm-submit.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("WEB-INF/motm-submit-servlet.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/motm-submit.jsp").forward(request, response);
 	}
-
 }

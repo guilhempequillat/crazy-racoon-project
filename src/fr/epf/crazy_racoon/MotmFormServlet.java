@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 public class MotmFormServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	@Inject
-	private UserDao userDao;
+	private MotmDao motmDao;
 	
     public MotmFormServlet() {
         super();
@@ -28,7 +28,8 @@ public class MotmFormServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Motm motm=parseMotm(request);
 		request.getSession().setAttribute("motm", motm);
-		response.sendRedirect("motm-submit-servlet");
+		motmDao.save(motm);
+		response.sendRedirect("motm-submit");
 	}
 	public Motm parseMotm(HttpServletRequest req) {
 		String comment=req.getParameter("comment");
