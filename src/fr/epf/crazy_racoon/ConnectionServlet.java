@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -25,18 +27,31 @@ public class ConnectionServlet extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.getSession().setAttribute("connect", false);
 		String email = req.getParameter("email");
 		String password = req.getParameter("password");
 		//User u = parseUser(req);
 		//req.getSession().setAttribute("user", u);
 		//incrementLiveUserCount();
-		User u = userDao.findOne(email);
-		if(u.getPassword()==password){
-			resp.sendRedirect("dashboard");
+		List <User>  listu = userDao.findAll();
+		Iterator <User> iterator = listu.iterator();
+		boolean find =false;
+		while(iterator.hasNext()&&find==false){
+			User u = iterator.next();
+			String userpsw =u.getPassword();
+			if(u.getPassword().equals(password)==true && u.getEmail().equals(email)==true){
+				resp.sendRedirect("dashboard");
+				find=true;
+			}
+		}
+		if(find==false){
+			req.getSession().setAttribute("connect", false);
+			resp.sendRedirect("register");
 		}else{
-			JOptionPane.showMessageDialog(null,"alert");
+			req.getSession().setAttribute("connect", true);
 		}
 	}
+	
 	
 //	
 //	private User parseUser(HttpServletRequest req) throws ParseException {

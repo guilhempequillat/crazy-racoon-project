@@ -18,6 +18,8 @@ public class User {
 	private Date birthdate;
 	private String email;
 	
+	public User() {}
+	
 	public User(String firstName, String lastName, String password, Date birthdate, String email) {
 		super();
 		this.firstName = firstName;

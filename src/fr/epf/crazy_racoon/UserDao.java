@@ -16,11 +16,11 @@ public class UserDao {
 		em.persist(u);
 	}
 	
-	public User findOne(String mail) {
-		return em.find(User.class, mail);
+	public User findOne(String id) {
+		return em.find(User.class, id);
 	}
 	
 	public List<User> findAll() {
-		return em.createQuery("SELECT * FROM user").getResultList();
+		return em.createQuery("FROM User").getResultList();
 	}
 }
