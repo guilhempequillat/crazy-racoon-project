@@ -33,9 +33,6 @@ public class ConnectionServlet extends HttpServlet {
 		req.getSession().setAttribute("connect", false);
 		String email = req.getParameter("email");
 		String password = req.getParameter("password");
-		//User u = parseUser(req);
-		//req.getSession().setAttribute("user", u);
-		//incrementLiveUserCount();
 		List <User>  listu = userDao.findAll();
 		Iterator <User> iterator = listu.iterator();
 		boolean find =false;

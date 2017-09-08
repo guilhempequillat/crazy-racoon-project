@@ -10,7 +10,6 @@
 	<body>
 	<c:out value = "${countMembers}"/>
 	<c:forEach items = "${users}" var = "user">
-		<c:out value = "${user}"/>
 		<h1>Hello ${user.firstName} ${user.birthdate}</h1>
 	</c:forEach>
 	</body>
