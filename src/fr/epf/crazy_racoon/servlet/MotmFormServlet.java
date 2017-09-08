@@ -28,8 +28,6 @@ public class MotmFormServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		User user = new User("Guilhem","Pequillat","qskdjqksj",new Date(1444,12,12),"hisdfsd@gmail.com");
-		request.getSession().setAttribute("user", user);
 		request.getSession().setAttribute("commentDefine", false);
 		request.getRequestDispatcher("WEB-INF/motm-form.jsp").forward(request, response);
 	}
