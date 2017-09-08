@@ -13,11 +13,11 @@
 <div class="panel-body">
    	<div class="row">
 		<div class="col-md-6 col-md-offset-3">
-			<h2>What is your mood this mounth ?</h2>
+			<h2>Hi ${ user.firstName } ! What is your mood this mounth ?</h2>
 			<form action="motm-form" method="POST" role="form">
 				<div class="form-group">
 					<label>Grade : </label>
-					<input type="number" name="grade" placeholder="1-5" class="form-control">
+					<input type="number" name="grade" placeholder="1-5" class="form-control" min="1" max="5">
 				</div>
 				<div class="form-group">
 				<label>Comment : </label>

@@ -1,6 +1,7 @@
 package fr.epf.crazy_racoon;
 
 import java.io.IOException;
+import java.sql.Date;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -23,9 +24,12 @@ public class MotmFormServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		User user = new User("Guilhem","Pequillat","qskdjqksj",new Date(1444,12,12),"hisdfsd@gmail.com");
+		request.getSession().setAttribute("user", user);
 		request.getRequestDispatcher("WEB-INF/motm-form.jsp").forward(request, response);
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		Motm motm=parseMotm(request);
 		request.getSession().setAttribute("motm", motm);
 		motmDao.save(motm);
@@ -37,5 +41,4 @@ public class MotmFormServlet extends HttpServlet {
 		Motm motm=new Motm(grade,comment);
 		return motm;
 	}
-
 }
