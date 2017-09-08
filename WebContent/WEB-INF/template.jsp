@@ -19,4 +19,5 @@
 
 test du bodyyyy
 </body>
+<%@include file="footer.jsp"%> 
 </html>
