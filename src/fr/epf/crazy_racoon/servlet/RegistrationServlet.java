@@ -29,11 +29,6 @@ public class RegistrationServlet extends HttpServlet {
 	public RegistrationServlet() {
 	}
 	
-	@Override
-	public void init() throws ServletException {
-		getServletContext().setAttribute("liveUserCount", 0);
-	}
-	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.getRequestDispatcher("WEB-INF/register.jsp").forward(request, response);
 	}
@@ -44,9 +39,8 @@ public class RegistrationServlet extends HttpServlet {
 		try {
 			u = parseUser(req);
 			req.getSession().setAttribute("user", u);
-			incrementLiveUserCount();
 			userDao.save(u);
-			resp.sendRedirect("dashboard");
+			resp.sendRedirect("motm-form");
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -61,10 +55,5 @@ public class RegistrationServlet extends HttpServlet {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date d = sdf.parse(req.getParameter("birthdate"));
 		return new User(firstName, lastName, password, d,email);
-	}
-	
-	private void incrementLiveUserCount() {
-		Integer liveUserCount = (Integer) getServletContext().getAttribute("liveUserCount");
-		getServletContext().setAttribute("liveUserCount", liveUserCount + 1);
 	}
 }

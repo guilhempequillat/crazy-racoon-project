@@ -17,6 +17,7 @@ public class User {
 	private String password;
 	private Date birthdate;
 	private String email;
+	private Boolean statut;
 	
 	public User() {}
 	
@@ -27,7 +28,16 @@ public class User {
 		this.birthdate = birthdate;
 		this.password = password;
 		this.email = email;
+		this.statut = false;
 	}	
+
+	public Boolean getStatut() {
+		return statut;
+	}
+
+	public void setStatut(Boolean statut) {
+		this.statut = statut;
+	}
 
 	public String getPassword() {
 		return password;

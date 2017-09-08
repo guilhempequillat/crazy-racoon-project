@@ -40,7 +40,11 @@ public class ConnectionServlet extends HttpServlet {
 			User u = iterator.next();
 			String userpsw =u.getPassword();
 			if(u.getPassword().equals(password)==true && u.getEmail().equals(email)==true){
-				resp.sendRedirect("dashboard");
+				if (u.getStatut()){
+					resp.sendRedirect("dashboard_admin");
+				}else{
+					resp.sendRedirect("motm-form");
+				}
 				find=true;
 			}
 		}
