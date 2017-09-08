@@ -1,4 +1,4 @@
-package fr.epf.crazy_racoon;
+package fr.epf.crazy_racoon.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,6 +14,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import fr.epf.crazy_racoon.dao.UserDao;
+import fr.epf.crazy_racoon.model.User;
 
 @WebServlet("/register")
 public class RegistrationServlet extends HttpServlet {

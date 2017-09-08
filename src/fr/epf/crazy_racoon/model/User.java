@@ -1,4 +1,4 @@
-package fr.epf.crazy_racoon;
+package fr.epf.crazy_racoon.model;
 
 import java.util.Date;
 

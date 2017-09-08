@@ -1,4 +1,4 @@
-package fr.epf.crazy_racoon;
+package fr.epf.crazy_racoon.servlet;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -14,6 +14,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.swing.JOptionPane;
+
+import fr.epf.crazy_racoon.dao.UserDao;
+import fr.epf.crazy_racoon.model.User;
 
 /**
  * Servlet implementation class ConnectionServlet

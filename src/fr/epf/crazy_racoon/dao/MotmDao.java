@@ -1,10 +1,12 @@
-package fr.epf.crazy_racoon;
+package fr.epf.crazy_racoon.dao;
 
 import java.util.List;
 
 import javax.ejb.Singleton;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+
+import fr.epf.crazy_racoon.model.Motm;
 
 @Singleton
 public class MotmDao {
