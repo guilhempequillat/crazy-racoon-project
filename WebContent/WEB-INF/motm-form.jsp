@@ -67,7 +67,7 @@
 								class="form-control" cols="" rows=""></textarea>
 						</div>
 
-						<input type="submit" value="Send" id ="btn" 
+						<input type="submit" value="Send" id="btn"
 							class="form-control btn btn-primary btn-block">
 
 					</form>
@@ -85,14 +85,16 @@
 							<br>
 							<div class="col-xs-3">
 								<div class="thumbnail">
-									<img src="img/racoon${ motm.grade }.jpg" class="img-responsive">
+									<img src="img/racoon${ motm.grade }.jpg" class="img-responsive"
+										alt="">
 								</div>
 								<!-- /thumbnail -->
 							</div>
 							<div class="col-xs-9">
 								<div class="panel panel-default">
 									<div class="panel-heading">
-										<strong>${ user.firstName  }</strong> <span class="text-muted">commented 5 days ago</span>
+										<strong>${ user.firstName  }</strong> <span class="text-muted">commented
+											5 days ago</span>
 									</div>
 									<div class="panel-body">
 										<p>${ motm.comment }</p>
@@ -107,23 +109,137 @@
 				</div>
 			</div>
 			<div class="col-md-6">
+				<!-- second part - stat -->
 				<div class="row">
 					<div class="col-md-12">
-						<div class="progress">
-							<div class="progress-bar progress-success"></div>
+
+<div class="row">
+
+   <div class="col-xs-3 col-xs-offset-3">
+                <img src="img/racoon1.jpg"  alt="" class="img-responsive" />
+   </div>
+   <div class="col-xs-6">
+            
+                  <h2><strong>Global Mood</strong></h2>
+                  <div class="note"><strong>4.2/5 </strong></div>      
+              </div>
+
+             </div>
+       
+
+
+						<div class="details"><br>
+							<div class="mood">
+							<div class="row">
+								<div class="col-xs-2">
+									<div class="img-container">
+										<img src="img/racoon1.jpg" alt="" class="img-responsive" />
+									</div>
+								</div>
+								<div class="col-xs-9">
+									<div class="progress-bar-container">
+										<span class="desc">Vote count: 10</span>
+										<div class="progress">
+											<div class="progress-bar progress-bar-danger"
+												role="progressbar" aria-valuenow="10" aria-valuemin="0"
+												aria-valuemax="100" style="width: 10%">
+												<span class="">10%</span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div></div>
+							<div class="mood"><div class="row">
+								<div class="col-xs-2">
+									<div class="img-container">
+										<img src="img/racoon2.jpg" alt="" class="img-responsive" />
+									</div>
+								</div>
+								<div class="col-xs-9">
+									<div class="progress-bar-container">
+										<span class="desc">Vote count: 5</span>
+										<div class="progress">
+											<div class="progress-bar progress-bar-warning"
+												role="progressbar" aria-valuenow="5" aria-valuemin="0"
+												aria-valuemax="100" style="width: 5%">
+												<span class="">5%</span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div></div>
+							<div class="mood"><div class="row">
+								<div class="col-xs-2">
+									<div class="img-container">
+										<img src="img/racoon3.jpg" alt="" class="img-responsive" />
+									</div>
+								</div>
+								<div class="col-xs-9">
+									<div class="progress-bar-container">
+										<span class="desc">Vote count: 15</span>
+										<div class="progress">
+											<div class="progress-bar progress-bar-neutral"
+												role="progressbar" aria-valuenow="15" aria-valuemin="0"
+												aria-valuemax="100" style="width: 15%">
+												<span class="">15%</span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div></div>
+							<div class="mood"><div class="row">
+								<div class="col-xs-2">
+									<div class="img-container">
+										<img src="img/racoon4.jpg" alt="" class="img-responsive" />
+									</div>
+								</div>
+								<div class="col-xs-9">
+									<div class="progress-bar-container">
+										<span class="desc">Vote count: 45</span>
+										<div class="progress">
+											<div class="progress-bar progress-bar-info"
+												role="progressbar" aria-valuenow="45" aria-valuemin="0"
+												aria-valuemax="100" style="width: 45%">
+												<span class="">45%</span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div></div>
+							<div class="mood"><div class="row">
+								<div class="col-xs-2">
+									<div class="img-container">
+										<img src="img/racoon5.jpg" alt="" class="img-responsive" />
+									</div>
+								</div>
+								<div class="col-xs-9">
+									<div class="progress-bar-container">
+										<span class="desc">Vote count: 25</span>
+										<div class="progress">
+											<div class="progress-bar progress-bar-success"
+												role="progressbar" aria-valuenow="25" aria-valuemin="0"
+												aria-valuemax="100" style="width: 25%">
+												<span class="">25%</span>
+											</div>
+										</div>
+									</div></div>
+								</div>
+							</div>
 						</div>
+
+
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-<script>
-$('#btn').click(function() {
-    $(this).val('Edit');
-});
+	<script type="text/javascript">
+		$('#btn').click(function() {
+			$(this).val('Edit');
+		});
+	</script>
 
-</script>
-
+	<div></div>
 </body>
 <%@include file="footer.jsp"%>
 </html>

@@ -13,3 +13,8 @@ opacity: 1;
 label {
 cursor: pointer;   
 }
+
+.note {
+            font-size: 2em;
+            opacity: 0.8;
+            }
