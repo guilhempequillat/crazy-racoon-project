@@ -109,9 +109,6 @@
 		<!-- /.modal-content -->
 	</div>
 	<!-- /.modal-dialog -->
-	<div></div>
-
-
 
 	<div class="modal fade" id="delete" tabindex="-1" role="dialog"
 		aria-labelledby="edit" aria-hidden="true">
