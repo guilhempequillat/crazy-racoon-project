@@ -18,7 +18,7 @@ public class UserDao {
 		em.persist(u);
 	}
 	
-	public User findOne(String id) {
+	public User findOne(Long id) {
 		return em.find(User.class, id);
 	}
 	

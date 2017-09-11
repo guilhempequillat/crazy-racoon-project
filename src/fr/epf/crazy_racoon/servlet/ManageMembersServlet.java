@@ -1,6 +1,9 @@
 package fr.epf.crazy_racoon.servlet;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -30,12 +33,32 @@ public class ManageMembersServlet extends HttpServlet {
 		request.getRequestDispatcher("WEB-INF/manage_members.jsp").forward(request, response);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		request.getRequestDispatcher("WEB-INF/add_member.jsp").forward(request, response);
+	}
+	
+	public void newUser (HttpServletRequest req) throws ParseException {
+		String firstName = req.getParameter("firstName");
+		String lastName = req.getParameter("lastName");
+		String email = req.getParameter("email");
+		String password = firstName+lastName+"default";
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date d = sdf.parse(req.getParameter("birthdate"));
+		User u =new User(firstName, lastName, password, d,email);
+		userDao.save(u);
+	}
+	
+	public void editUser (HttpServletRequest req, Long id) throws ParseException {
+		User u = userDao.findOne(id);
+		u.setFirstName(req.getParameter("firstName"));
+		u.setLastName(req.getParameter("lastName"));
+		u.setEmail(req.getParameter("email"));
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		u.setBirthdate(sdf.parse(req.getParameter("birthdate")));
+	}
+	
+	public void searchUser(Long id){
+		
 	}
 
 }

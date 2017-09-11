@@ -12,71 +12,59 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
 	type="text/javascript"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Admin-Manage Member</title>
+<title>Admin-Add Member</title>
 </head>
 <body>
 
+<div>
+				<div class="modal-dialog">
 
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12">
-				<h4>Manage Members</h4>
-				<div class="table-responsive">
+					<!-- Modal content-->
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-hidden="true">
+								<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+							</button>
+							<h4 class="modal-title custom_align" id="Heading">Add a new
+								member</h4>
+						</div>
+						<div class="modal-body">
+							<div class="form-group">
+								<input class="form-control " type="text"
+									placeholder="First name">
+							</div>
+							<div class="form-group">
+
+								<input class="form-control " type="text" placeholder="Last name">
+							</div>
+							<div class="form-group">
+
+								<input class="form-control " type="mail" placeholder="Email">
+							</div>
+							<div class="form-group">
+								<input class="form-control " type="text" placeholder="Password">
+							</div>
+							<div class="form-group">
+
+								<input class="form-control " type="date" placeholder="Birthdate">
+							</div>
 
 
-					<table id="mytable" class="table table-bordred table-striped">
+						</div>
+						<div class="modal-footer ">
+						<form id="edit-form" action="manage_members" method="POST" role="form" >
+								<input type="submit" class="btn btn-warning btn-lg" style="width: 100%;">	
+								<span class="glyphicon glyphicon-ok-sign"></span> Add
+						</form>
+						</div>
 
-						<thead>
-
-							<th>First Name</th>
-							<th>Last Name</th>
-							<th>Email</th>
-							<th>Birthdate</th>
-							<th>Edit</th>
-							<th>Delete</th>
-						</thead>
-						<tbody>
-
-
-							<c:forEach items="${users}" var="user">
-								<tr>
-									<td>${user.firstName}</td>
-									<td>${user.lastName}</td>
-									<td>${user.email}</td>
-									<td>${user.birthdate}</td>
-
-									<td><p data-placement="top" data-toggle="tooltip"
-											title="Edit">
-											<button class="btn btn-primary btn-xs" data-title="Edit"
-												data-toggle="modal" data-target="#edit">
-												<span class="glyphicon glyphicon-pencil"></span>
-											</button>
-										</p></td>
-									<td><p data-placement="top" data-toggle="tooltip"
-											title="Delete">
-											<button class="btn btn-danger btn-xs" data-title="Delete"
-												data-toggle="modal" data-target="#delete">
-												<span class="glyphicon glyphicon-trash"></span>
-											</button>
-										</p></td>
-								</tr>
-							</c:forEach>
-
-						</tbody>
-
-					</table>
-					<!-- pagination -->
-					<div class="clearfix"></div>
-
+					</div>
 				</div>
-
 			</div>
-		</div>
-
-
-
-		<div class="modal fade" id="edit" tabindex="-1" role="dialog"
-			aria-labelledby="edit" aria-hidden="true">
+		
+		
+	<div>
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -91,7 +79,6 @@
 							<input class="form-control " type="text" placeholder="First name">
 						</div>
 						<div class="form-group">
-
 
 							<input class="form-control " type="text" placeholder="Last name">
 						</div>
@@ -161,14 +148,5 @@
 		</div>
 
 
-		<div class="container">
-			<!-- Trigger the modal with a button -->
-			<button type="button" class="btn btn-info btn-lg" data-toggle="modal"
-				data-target="#myModal">Add a member</button>
-
-			<!-- Modal -->
-			
-		</div>
-	</div>
 </body>
 </html>
