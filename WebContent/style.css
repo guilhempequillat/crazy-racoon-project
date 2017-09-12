@@ -15,6 +15,71 @@ cursor: pointer;
 }
 
 .note {
-            font-size: 2em;
-            opacity: 0.8;
+            font-size: 3vw;
+            opacity: 0.6;
             }
+.year{
+	
+	font-size: 4vw;
+    opacity: 1;
+}
+.month{
+	
+	font-size: 4vw;
+    opacity: 1;
+}
+
+.sub_title{
+	font-size: 2vw;
+    opacity: 0.6;
+	
+	
+}
+.title_mood{
+		font-size: 2vw;
+		margin-top: 50px
+
+	
+}
+ .comment-container {
+        width: 100%;
+        background: rgba(214, 214, 214, 1);
+        min-height: 60px;
+        font-size: 1.2em;
+        text-align: justify;
+        padding: 8px 8px 8px 0;
+        font-weight: 300;
+        display: flex;
+        margin-bottom: 10px; }
+        
+  .comment-container .note {
+          padding-left: 8px;
+          width: 60px;
+          display: flex; }
+.comment-container .note .mood {
+            max-width: 60px;
+            flex: 1 1 1px;
+            padding-right : 8px;
+            align-self: center; }
+
+ .comment-container .comment {
+          padding-left :10px;
+          padding-right : 8px;
+          flex: 1 1 0px;
+          width: calc(100% - 60px); 
+          }
+        
+        
+        
+.progress-bar-container {
+        flex: 8 1 0px;
+        align-self: center;
+        padding: 0 10px; }
+
+.progress-bar-container .progress-bar-midsuccess {
+          background-color: #e5d716 !important; }
+ .mood .progress-bar-container .progress-bar-neutral {
+          background-color: #8cd116  !important; }
+.progress-bar-container .progress-bar-success {
+          background-color: #3fcf19 !important; }
+            
