@@ -12,7 +12,7 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
 	type="text/javascript"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Admin-Add Member</title>
+<title>Admin-Edit Member</title>
 </head>
 <body>
 
@@ -27,18 +27,18 @@
 					<div class="panel-body">
 						<div class="row">
 							<div class="col-lg-12">
-								<form id="register-form" action="add_member" method="POST" role="form">
+								<form id="register-form" action="edit_member" method="POST" role="form">
 									<div class="form-group">
-										<input type="text" name="firstName" placeholder="First Name" id="firstname"  class="form-control" >
+										<input type="text" value="${userEdit.firstName}" name="firstName" placeholder="First Name" id="firstname"  class="form-control" >
 									</div>
 									<div class="form-group">
-										<input type="text" name="lastName" placeholder="Last Name" id="lastName"  class="form-control" >
+										<input type="text" value="${userEdit.lastName}" name="lastName" placeholder="Last Name" id="lastName"  class="form-control" >
 									</div>
 									<div class="form-group">
-										<input type="email" name="email" id="email" class="form-control" placeholder="Email Address" >
+										<input type="email" value="${userEdit.email}" name="email" id="email" class="form-control" placeholder="Email Address" >
 									</div>
 									<div class="form-group">
-										<input type="date" name="birthdate" placeholder="Birthdate" id="birthdate"  class="form-control" >
+										<input type="date" value="${userEdit.birthdate}" name="birthdate" placeholder="Birthdate" id="birthdate"  class="form-control" >
 									</div>
 									
 									<div class="form-group">

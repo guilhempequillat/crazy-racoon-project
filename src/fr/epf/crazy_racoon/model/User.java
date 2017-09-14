@@ -1,5 +1,6 @@
 package fr.epf.crazy_racoon.model;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -16,6 +17,7 @@ public class User {
 	private String lastName;
 	private String password;
 	private Date birthdate;
+	private String stringDate;
 	private String email;
 	private Boolean statut;
 	
@@ -29,6 +31,7 @@ public class User {
 		this.password = password;
 		this.email = email;
 		this.statut = false;
+		setStringDate();
 	}	
 
 	public Boolean getStatut() {
@@ -82,6 +85,11 @@ public class User {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	
+	public void setStringDate(){
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		stringDate = sdf.format(birthdate);
 	}
 	
 }

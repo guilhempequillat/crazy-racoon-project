@@ -45,20 +45,14 @@
 									<td>${user.email}</td>
 									<td>${user.birthdate}</td>
 
-									<td><p data-placement="top" data-toggle="tooltip"
-											title="Edit">
-											<button class="btn btn-primary btn-xs" data-title="Edit"
-												data-toggle="modal" data-target="#edit">
-												<span class="glyphicon glyphicon-pencil"></span>
-											</button>
-										</p></td>
-									<td><p data-placement="top" data-toggle="tooltip"
-											title="Delete">
-											<button class="btn btn-danger btn-xs" data-title="Delete"
-												data-toggle="modal" data-target="#delete">
-												<span class="glyphicon glyphicon-trash"></span>
-											</button>
-										</p></td>
+									<td><form action="edit_member" method="GET">
+											<input type="text" value="${user.id}" name="editbutton" style="display:none;">
+											<input type="submit" class="class="icon-edit"">
+										</form></td>
+									<td><form action="manage_members" method="POST">
+											<input type="text" value="${user.id}" name="removebutton" style="display:none;">
+											<input type="submit" class="glyphicon glyphicon-pencil">
+										</form></td>
 								</tr>
 							</c:forEach>
 
@@ -74,101 +68,11 @@
 		</div>
 
 
-
-		<div class="modal fade" id="edit" tabindex="-1" role="dialog"
-			aria-labelledby="edit" aria-hidden="true">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal"
-							aria-hidden="true">
-							<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-						</button>
-						<h4 class="modal-title custom_align" id="Heading">Edit Member</h4>
-					</div>
-					<div class="modal-body">
-						<div class="form-group">
-							<input class="form-control " type="text" placeholder="First name">
-						</div>
-						<div class="form-group">
+	</div>
 
 
-							<input class="form-control " type="text" placeholder="Last name">
-						</div>
-						<div class="form-group">
-
-							<input class="form-control " type="mail" placeholder="Email">
-						</div>
-						<div class="form-group">
-
-							<input class="form-control " type="date" placeholder="Birthdate">
-						</div>
-
-
-					</div>
-					<div class="modal-footer ">
-						<button type="button" class="btn btn-warning btn-lg"
-							style="width: 100%;">
-							<span class="glyphicon glyphicon-ok-sign"></span> Update
-						</button>
-					</div>
-				</div>
-				<!-- /.modal-content -->
-			</div>
-			<!-- /.modal-dialog -->
-			<div></div>
-
-
-
-			<div class="modal fade" id="delete" tabindex="-1" role="dialog"
-				aria-labelledby="edit" aria-hidden="true">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal"
-								aria-hidden="true">
-								<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-							</button>
-							<h4 class="modal-title custom_align" id="Heading">Delete
-								this entry</h4>
-						</div>
-						<div class="modal-body">
-
-							<div class="alert alert-danger">
-								<span class="glyphicon glyphicon-warning-sign"></span> Are you
-								sure you want to delete this Record?
-							</div>
-
-						</div>
-						<div class="modal-footer ">
-							<button type="button" class="btn btn-success">
-								<span class="glyphicon glyphicon-ok-sign"></span> Yes
-							</button>
-							<button type="button" class="btn btn-default"
-								data-dismiss="modal">
-								<span class="glyphicon glyphicon-remove"></span> No
-							</button>
-						</div>
-					</div>
-					<!-- /.modal-content -->
-				</div>
-				<!-- /.modal-dialog -->
-			</div>
-
-			<br>
-
-
-		</div>
-
-
-		<div class="container">
-			<!-- Trigger the modal with a button -->
-			<button type="button" class="btn btn-info btn-lg" data-toggle="modal"
-				data-target="#myModal">Add a member</button>
-
-			<!-- Modal -->
-			
-		</div>
+	<div class="container">
+		<a href="add_member" class="btn btn-info btn-lg">Add a member</a>
 	</div>
 </body>
 </html>
