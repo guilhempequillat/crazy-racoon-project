@@ -43,4 +43,8 @@ public class UserDao {
 		}
 		em.flush();
 	}
+	
+	public void removeOne(Long id){
+		em.remove(findOne(id));
+	}
 }

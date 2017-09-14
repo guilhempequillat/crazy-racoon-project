@@ -27,7 +27,6 @@ public class EditMemberServlet extends HttpServlet {
 	private User userEdit;
    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//request.getRequestDispatcher("WEB-INF/edit_member.jsp").forward(request, response);
 		String id = request.getParameter("editbutton");
 		Long i= (long) Integer.parseInt(id);
 		userEdit = userDao.findOne(i);

@@ -34,16 +34,8 @@ public class ManageMembersServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("WEB-INF/add_member.jsp").forward(request, response);
+		Long id = (long) Integer.parseInt(request.getParameter("removebutton"));
+		userDao.removeOne(id);
+		response.sendRedirect("manage_members");
 	}
-	
-	public void editUser (HttpServletRequest req, Long id) throws ParseException {
-		User u = userDao.findOne(id);
-		u.setFirstName(req.getParameter("firstName"));
-		u.setLastName(req.getParameter("lastName"));
-		u.setEmail(req.getParameter("email"));
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		u.setBirthdate(sdf.parse(req.getParameter("birthdate")));
-	}
-
 }
