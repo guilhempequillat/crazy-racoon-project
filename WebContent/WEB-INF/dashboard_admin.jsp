@@ -15,6 +15,7 @@
     
 <title>Insert title here</title>
 </head>
+<%@include file="header.jsp"%>
 <body>
  <div id="wrapper">
 
@@ -239,4 +240,5 @@
     </div>
 
 </body>
+<%@include file="footer.jsp"%> 
 </html>

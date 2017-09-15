@@ -30,7 +30,6 @@ public class ConnectionServlet extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.getSession().setAttribute("connect", false);
 		String email = req.getParameter("email");
 		String password = req.getParameter("password");
 		List <User>  listu = userDao.findAll();
@@ -39,8 +38,9 @@ public class ConnectionServlet extends HttpServlet {
 		while(iterator.hasNext()&&find==false){
 			User u = iterator.next();
 			if(u.getPassword().equals(password)==true && u.getEmail().equals(email)==true){
+				req.getSession().setAttribute("user", u);
 				if (u.getStatut()){
-					resp.sendRedirect("dashboard_admin");
+					resp.sendRedirect("dashboard-admin");
 				}else{
 					resp.sendRedirect("motm-form");
 				}
@@ -48,10 +48,7 @@ public class ConnectionServlet extends HttpServlet {
 			}
 		}
 		if(find==false){
-			req.getSession().setAttribute("connect", false);
 			resp.sendRedirect("register");
-		}else{
-			req.getSession().setAttribute("connect", true);
 		}
 	}
 

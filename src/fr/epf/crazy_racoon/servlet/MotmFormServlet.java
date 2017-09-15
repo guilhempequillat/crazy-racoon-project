@@ -32,7 +32,6 @@ public class MotmFormServlet extends HttpServlet {
 		request.getRequestDispatcher("WEB-INF/motm-form.jsp").forward(request, response);
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		Motm motm=parseMotm(request);
 		request.getSession().setAttribute("motm", motm);
 		motmDao.save(motm);
