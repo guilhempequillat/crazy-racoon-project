@@ -38,7 +38,7 @@
 										<input type="email" value="${userEdit.email}" name="email" id="email" class="form-control" placeholder="Email Address" >
 									</div>
 									<div class="form-group">
-										<input type="date" value="${userEdit.birthdate}" name="birthdate" placeholder="Birthdate" id="birthdate"  class="form-control" >
+										<input type="date" value="${userEdit.stringDate}" name="birthdate" placeholder="Birthdate" id="birthdate"  class="form-control" >
 									</div>
 									
 									<div class="form-group">

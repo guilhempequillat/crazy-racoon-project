@@ -87,6 +87,14 @@ public class User {
 		this.email = email;
 	}
 	
+	public String getStringDate() {
+		return stringDate;
+	}
+
+	public void setStringDate(String stringDate) {
+		this.stringDate = stringDate;
+	}
+
 	public void setStringDate(){
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		stringDate = sdf.format(birthdate);

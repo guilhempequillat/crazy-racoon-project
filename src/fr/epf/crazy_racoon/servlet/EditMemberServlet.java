@@ -45,7 +45,7 @@ public class EditMemberServlet extends HttpServlet {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		response.sendRedirect("manage_members");
+		response.sendRedirect("manage-members");
 	}
 
 }

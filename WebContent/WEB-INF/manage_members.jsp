@@ -43,7 +43,7 @@
 									<td>${user.firstName}</td>
 									<td>${user.lastName}</td>
 									<td>${user.email}</td>
-									<td>${user.birthdate}</td>
+									<td>${user.stringDate}</td>
 
 									<td><form action="edit-member" method="GET">
 											<input type="text" value="${user.id}" name="editbutton" style="display:none;">
