@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class MotmUserStatServlet
  */
-@WebServlet("/motm_user_stat")
+@WebServlet("/motm-user-stat")
 public class MotmUserStatServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

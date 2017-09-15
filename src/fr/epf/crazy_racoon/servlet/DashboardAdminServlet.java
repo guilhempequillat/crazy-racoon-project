@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class DashboardAdminServlet
  */
-@WebServlet("/dashboard_admin")
+@WebServlet("/dashboard-admin")
 public class DashboardAdminServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

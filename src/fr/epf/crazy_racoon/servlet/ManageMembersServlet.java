@@ -20,7 +20,7 @@ import fr.epf.crazy_racoon.model.User;
 /**
  * Servlet implementation class ManageMemberServlet
  */
-@WebServlet("/manage_members")
+@WebServlet("/manage-members")
 public class ManageMembersServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -36,6 +36,6 @@ public class ManageMembersServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Long id = (long) Integer.parseInt(request.getParameter("removebutton"));
 		userDao.removeOne(id);
-		response.sendRedirect("manage_members");
+		response.sendRedirect("manage-members");
 	}
 }

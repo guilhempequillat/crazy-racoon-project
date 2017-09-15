@@ -27,7 +27,7 @@
 					<div class="panel-body">
 						<div class="row">
 							<div class="col-lg-12">
-								<form id="register-form" action="add_member" method="POST" role="form">
+								<form id="register-form" action="add-member" method="POST" role="form">
 									<div class="form-group">
 										<input type="text" name="firstName" placeholder="First Name" id="firstname"  class="form-control" >
 									</div>

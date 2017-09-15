@@ -18,7 +18,7 @@ import fr.epf.crazy_racoon.model.User;
 /**
  * Servlet implementation class EditMemberServlet
  */
-@WebServlet("/edit_member")
+@WebServlet("/edit-member")
 public class EditMemberServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	

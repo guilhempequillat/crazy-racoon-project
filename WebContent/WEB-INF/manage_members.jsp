@@ -45,11 +45,11 @@
 									<td>${user.email}</td>
 									<td>${user.birthdate}</td>
 
-									<td><form action="edit_member" method="GET">
+									<td><form action="edit-member" method="GET">
 											<input type="text" value="${user.id}" name="editbutton" style="display:none;">
 											<input type="submit" class="class="icon-edit"">
 										</form></td>
-									<td><form action="manage_members" method="POST">
+									<td><form action="manage-members" method="POST">
 											<input type="text" value="${user.id}" name="removebutton" style="display:none;">
 											<input type="submit" class="glyphicon glyphicon-pencil">
 										</form></td>
@@ -72,7 +72,7 @@
 
 
 	<div class="container">
-		<a href="add_member" class="btn btn-info btn-lg">Add a member</a>
+		<a href="add-member" class="btn btn-info btn-lg">Add a member</a>
 	</div>
 </body>
 </html>

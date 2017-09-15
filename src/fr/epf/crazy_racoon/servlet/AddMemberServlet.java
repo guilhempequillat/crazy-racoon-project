@@ -18,7 +18,7 @@ import fr.epf.crazy_racoon.model.User;
 /**
  * Servlet implementation class AddMemberServlet
  */
-@WebServlet("/add_member")
+@WebServlet("/add-member")
 public class AddMemberServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
@@ -43,7 +43,7 @@ public class AddMemberServlet extends HttpServlet {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		response.sendRedirect("manage_members");
+		response.sendRedirect("manage-members");
 	}
 
 }
