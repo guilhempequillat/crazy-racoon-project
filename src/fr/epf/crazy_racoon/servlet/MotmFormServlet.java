@@ -2,6 +2,7 @@ package fr.epf.crazy_racoon.servlet;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.sql.Timestamp;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -9,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 
 import fr.epf.crazy_racoon.dao.MotmDao;
 import fr.epf.crazy_racoon.model.Motm;
@@ -41,8 +43,10 @@ public class MotmFormServlet extends HttpServlet {
 	public Motm parseMotm(HttpServletRequest req) {
 		String comment=req.getParameter("comment");
 		User user=(User) req.getSession().getAttribute("user");
+		Timestamp stamp = new Timestamp(System.currentTimeMillis());
+		Date motmDate=new Date(stamp.getTime());
 		int grade=Integer.parseInt(req.getParameter("grade"));
-		Motm motm=new Motm(grade,comment,user);
+		Motm motm=new Motm(grade,comment,user,motmDate);
 		return motm;
 	}
 }

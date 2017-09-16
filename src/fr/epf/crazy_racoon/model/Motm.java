@@ -1,5 +1,7 @@
 package fr.epf.crazy_racoon.model;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,12 +17,14 @@ public class Motm {
 	private String comment;
 	@OneToOne(targetEntity=User.class)
     private User user;
+	private Date motmDate;
 	
-	public Motm(int grade, String comment, User user) {
+	public Motm(int grade, String comment, User user, Date motmDate) {
 		super();
 		this.grade = grade;
 		this.comment = comment;
 		this.user = user;
+		this.motmDate = motmDate;
 	}
 	public Motm(int grade, String comment) {
 		super();
@@ -30,6 +34,12 @@ public class Motm {
 	public Motm() {
 	}
 	
+	public Date getMotmDate() {
+		return motmDate;
+	}
+	public void setMotmDate(Date motmDate) {
+		this.motmDate = motmDate;
+	}
 	public User getUser() {
 		return user;
 	}
