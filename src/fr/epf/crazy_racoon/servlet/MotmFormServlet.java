@@ -40,8 +40,9 @@ public class MotmFormServlet extends HttpServlet {
 	}
 	public Motm parseMotm(HttpServletRequest req) {
 		String comment=req.getParameter("comment");
+		User user=(User) req.getSession().getAttribute("user");
 		int grade=Integer.parseInt(req.getParameter("grade"));
-		Motm motm=new Motm(grade,comment);
+		Motm motm=new Motm(grade,comment,user);
 		return motm;
 	}
 }
