@@ -17,7 +17,6 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-6 col-xs-offset-3">
-
 				<c:if test="${not empty user }">
 					<h2 align="center">
 						<strong>Hi ${ user.firstName } ! </strong> <br> What is your
@@ -27,7 +26,6 @@
 						<div class="form-group">
 							<label>Grade : </label>
 							<div class="row">
-
 								<div class="col-xs-2 col-xs-offset-1">
 									<input type="radio" class="radio_item" name="grade" value="1"
 										id="radio1"> <label class="label_item" for="radio1">
@@ -66,20 +64,14 @@
 							<textarea name="comment" placeholder="Comment"
 								class="form-control" cols="" rows=""></textarea>
 						</div>
-
 						<input type="submit" value="Send" id="btn"
 							class="form-control btn btn-primary btn-block">
-
 					</form>
 				</c:if>
 				<c:if test="${empty user }">
 					<h1>You are not connected !!!</h1>
 				</c:if>
-
 				<div>
-
-
-
 					<c:if test="${not empty motm }">
 						<div class="row">
 							<br>
@@ -93,8 +85,49 @@
 							<div class="col-xs-9">
 								<div class="panel panel-default">
 									<div class="panel-heading">
-										<strong>${ user.firstName  }</strong> <span class="text-muted">commented
-											5 days ago</span>
+										<strong>${ user.firstName  }</strong>
+										 <span class="text-muted">
+										 commented
+										<c:choose>
+										  <c:when test="${year > 0 }">
+											  <c:if test="${year > 1 }">
+											 		${ year } years ago</span>
+											 	</c:if>
+											 	<c:if test="${year == 1 }">
+											 		${ year } year ago</span>
+											 	</c:if>
+										  </c:when>
+										  <c:otherwise> 
+										  	<c:choose>
+										  		<c:when test="${month > 0 }">
+											  		<c:if test="${month > 1 }">
+												 		${ month } months ago</span>
+												 	</c:if>
+												 	<c:if test="${month == 1 }">
+												 		${ month } month ago</span>
+												 	</c:if>
+										  		</c:when>
+										  		<c:otherwise> 
+										  			<c:choose>
+											  			<c:when test="${day >= 0 }">
+												  			<c:if test="${day > 1 }">
+														 		${ day } days ago</span>
+														 	</c:if>
+														 	<c:if test="${day == 1 }">
+														 		yesterday</span>
+														 	</c:if>
+														 	<c:if test="${ day == 0 }">
+														 		today</span>
+														 	</c:if>
+											  			</c:when>
+											  			<c:otherwise> 
+														 		</span>
+														 </c:otherwise>
+											  		</c:choose>
+										  		</c:otherwise>
+										  	</c:choose>
+										  </c:otherwise>
+										</c:choose>
 									</div>
 									<div class="panel-body">
 										<p>${ motm.comment }</p>
@@ -105,10 +138,8 @@
 							</div>
 						</div>
 					</c:if>
-
 				</div>
 			</div>
-			
 		</div>
 	</div>
 	<script type="text/javascript">

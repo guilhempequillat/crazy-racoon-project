@@ -44,7 +44,8 @@ public class MotmFormServlet extends HttpServlet {
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Motm motm=parseMotm(request);
-		request.getSession().setAttribute("motm", motm);
+		//request.getSession().setAttribute("motm", motm);
+		saveMotmInSession(request, motm);
 		motmDao.save(motm);
 		request.getSession().setAttribute("commentDefine", true);
 		response.sendRedirect("motm-form");
@@ -81,10 +82,24 @@ public class MotmFormServlet extends HttpServlet {
 		List<Motm> listMotm = new ArrayList<Motm>();
 		listMotm = motmDao.fillAllByIdUser(user.getId());
 		if(listMotm.size() > 0) {
-			request.getSession().setAttribute("motm", listMotm.get(0));
+			//request.getSession().setAttribute("motm", listMotm.get(0));
+			saveMotmInSession(request, listMotm.get(0));
 			request.getSession().setAttribute("commentDefine", true);
 		}else {
 			request.getSession().setAttribute("motm", null);
 		}
+	}
+	public void saveMotmInSession(HttpServletRequest request, Motm motm) {
+		request.getSession().setAttribute("motm", motm);
+		java.util.Date motmDate = motm.getMotmDate();
+		Calendar calendarMotm = Calendar.getInstance();
+		calendarMotm.setTime(motmDate);
+		Timestamp stamp = new Timestamp(System.currentTimeMillis());
+		Date stampDate=new Date(stamp.getTime());
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(stampDate);
+		request.getSession().setAttribute("year",(int) (calendar.get(Calendar.YEAR)-calendarMotm.get(Calendar.YEAR)));
+		request.getSession().setAttribute("month",(int) (calendar.get(Calendar.MONTH)-calendarMotm.get(Calendar.MONTH)));
+		request.getSession().setAttribute("day",(int) (calendar.get(Calendar.DAY_OF_MONTH)-calendarMotm.get(Calendar.DAY_OF_MONTH)));
 	}
 }
