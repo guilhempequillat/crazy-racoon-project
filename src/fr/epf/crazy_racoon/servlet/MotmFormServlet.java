@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 
 
 import fr.epf.crazy_racoon.dao.MotmDao;
+import fr.epf.crazy_racoon.dao.UserDao;
 import fr.epf.crazy_racoon.model.Motm;
 import fr.epf.crazy_racoon.model.User;
 
@@ -34,6 +35,11 @@ public class MotmFormServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.getSession().setAttribute("commentDefine", false);
+		if (request.getSession().getAttribute("user") != null) {
+			loadMotm(request);
+		} else {
+			request.getSession().setAttribute("motm", null);
+		}
 		request.getRequestDispatcher("WEB-INF/motm-form.jsp").forward(request, response);
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -68,6 +74,17 @@ public class MotmFormServlet extends HttpServlet {
 			if(calendarMotm.get(Calendar.MONTH) == calendar.get(Calendar.MONTH) && calendarMotm.get(Calendar.YEAR)== calendar.get(Calendar.YEAR)) {
 				motmDao.deleteMotmById(listMotm.get(i).getId());
 			}
+		}
+	}
+	public void loadMotm(HttpServletRequest request) {
+		User user = (User) request.getSession().getAttribute("user");
+		List<Motm> listMotm = new ArrayList<Motm>();
+		listMotm = motmDao.fillAllByIdUser(user.getId());
+		if(listMotm.size() > 0) {
+			request.getSession().setAttribute("motm", listMotm.get(0));
+			request.getSession().setAttribute("commentDefine", true);
+		}else {
+			request.getSession().setAttribute("motm", null);
 		}
 	}
 }
