@@ -50,8 +50,8 @@ public class MotmFormServlet extends HttpServlet {
 		Date motmDate=new Date(stamp.getTime());
 		int grade=Integer.parseInt(req.getParameter("grade"));
 		Motm motm=new Motm(grade,comment,user,motmDate);
-		Long testId=(long) 1;
-		checkMotmDate(testId);
+		Long idUser=(long) user.getId();
+		checkMotmDate(idUser);
 		return motm;
 	}
 	public void checkMotmDate(Long idUser) {
