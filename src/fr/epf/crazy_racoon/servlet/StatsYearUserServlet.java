@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.epf.crazy_racoon.dao.MotmDao;
 import fr.epf.crazy_racoon.dao.UserDao;
 import fr.epf.crazy_racoon.model.User;
 
@@ -21,18 +22,18 @@ public class StatsYearUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Inject
-	private UserDao userDao;
+	private MotmDao motmDao;
 	private String[] labelMonth = { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jui", "Aug", "Sep", "Oct", "Nov",
 			"Dec" };
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		double[] aveRates = userDao.rateMonth();
+		double[] aveRates = motmDao.rateMonth();
 		for (int i = 0; i < aveRates.length; i++) {
 			request.getSession().setAttribute("RateMonth" + (i + 1), aveRates[i]);
 		}
 		User user = (User) request.getSession().getAttribute("user");
-		double[] rates = userDao.ownRateMonth(user.getId());
+		double[] rates = motmDao.ownRateMonth(user.getId());
 		for (int i = 0; i < rates.length; i++) {
 			request.getSession().setAttribute("Rate2Month" + (i + 1), rates[i]);
 		}
