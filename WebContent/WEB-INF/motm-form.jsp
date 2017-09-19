@@ -11,9 +11,14 @@
 <script src="bootstrap/js/jquery-3.1.1.min.js" type="text/javascript"></script>
 <script src="bootstrap/js/bootstrap.js" type="text/javascript"></script>
 </head>
-<%@include file="header.jsp"%>
+<%@include file="header-user.jsp"%>
 <body>
-
+<div class="row">
+				<div class="col-lg-12">
+					<h1 class="page-header">MOTM Form</h1>
+				</div>
+			
+			</div>
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-6 col-xs-offset-3">

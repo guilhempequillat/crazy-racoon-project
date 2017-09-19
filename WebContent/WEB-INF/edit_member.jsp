@@ -11,12 +11,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Admin-Edit Member</title>
 </head>
-<%@include file="header.jsp"%>
+<%@include file="header-admin.jsp"%>
 <body>
-	<br>
-	<br>
-	<br>
-	<br>
+	<div class="row">
+				<div class="col-lg-12">
+					<h1 class="page-header">Edit Members</h1>
+				</div>
+			
+			</div>
         <div class="panel-body">
     	<div class="row">
 			<div class="col-md-6 col-md-offset-3">

@@ -8,11 +8,16 @@
 <title>Motm User Stat</title>
 <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
 <link href="style.css" rel="stylesheet">
-<title>Insert title here</title>
 </head>
-<%@include file="header.jsp"%>
+<%@include file="header-user.jsp"%>
 <body>
 
+<div class="row">
+				<div class="col-lg-12">
+					<h1 class="page-header">Report</h1>
+				</div>
+			
+			</div>
 	<div class="col-md-6 ">
 		<!-- second part - stat -->
 		<div class="row">

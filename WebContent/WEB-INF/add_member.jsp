@@ -10,13 +10,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Admin-Add Member</title>
 </head>
-<%@include file="header.jsp"%>
+<%@include file="header-admin.jsp"%>
 <body>
 
-	<br>
-	<br>
-	<br>
-	<br>
+	<div class="row">
+				<div class="col-lg-12">
+					<h1 class="page-header">Add Members</h1>
+				</div>
+				<!-- /.col-lg-12 -->
+			</div>
         <div class="panel-body">
     	<div class="row">
 			<div class="col-md-6 col-md-offset-3">

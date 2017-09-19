@@ -1,5 +1,10 @@
 <script src="https://code.jquery.com/jquery.js"></script>
     <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+
+<link
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+	rel="stylesheet" type="text/css">
    <nav class="navbar navbar-default">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -10,25 +15,22 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#"> MOTM | Crazy Racoon </a>
+      <a class="navbar-brand" href="register"> MOTM | Crazy Racoon </a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       
 
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Link</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My profil<span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Settings</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-          </ul>
-        </li>
+      <ul class="nav navbar-nav navbar-left">
+        <li class="active"><a href="motm-form"> <span class="fa fa-pencil"></span>  MOTM </a></li> 
+        <li><a href="motm-user-stat"> <span class="fa fa-smile-o"></span>  Previous moods</a></li> 
+        <li><a href="stats-year-user"> <span class="fa fa-line-chart"></span> Statistics</a></li> 
+        
+      </ul>
+       <ul class="nav navbar-nav navbar-right">
+       <li><a href=""><span class="glyphicon glyphicon-cog"></span> Settings</a></li>
+       <li><a href="#"><span class="fa fa-sign-out"></span> Logout</a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

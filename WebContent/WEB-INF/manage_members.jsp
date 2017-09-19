@@ -11,9 +11,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Admin-Manage Member</title>
 </head>
-<%@include file="header.jsp"%>
+<%@include file="header-admin.jsp"%>
 <body>
 
+<div class="row">
+				<div class="col-lg-12">
+					<h1 class="page-header">Manage Members</h1>
+				</div>
+			
+			</div>
 
 	<div class="container">
 		<div class="row">
