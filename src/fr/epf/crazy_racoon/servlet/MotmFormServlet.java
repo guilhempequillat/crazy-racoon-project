@@ -38,7 +38,7 @@ public class MotmFormServlet extends HttpServlet {
 		if (request.getSession().getAttribute("user") != null) {
 			loadMotm(request);
 		} else {
-			request.getSession().setAttribute("motm", null);
+			request.getSession().setAttribute("motm" , null);
 		}
 		request.getRequestDispatcher("WEB-INF/motm-form.jsp").forward(request, response);
 	}
