@@ -40,6 +40,7 @@ public class UserDao {
 		}
 		if(d!=userEdit.getBirthdate()){
 			userEdit.setBirthdate(d);
+			userEdit.setStringDate();
 		}
 		em.flush();
 	}

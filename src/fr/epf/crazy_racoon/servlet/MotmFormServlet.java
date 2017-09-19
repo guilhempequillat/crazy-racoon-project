@@ -16,8 +16,9 @@ import javax.servlet.http.HttpServletResponse;
 
 
 import fr.epf.crazy_racoon.dao.MotmDao;
-import fr.epf.crazy_racoon.dao.UserDao;
+import fr.epf.crazy_racoon.dao.TemplateDao;
 import fr.epf.crazy_racoon.model.Motm;
+import fr.epf.crazy_racoon.model.Template;
 import fr.epf.crazy_racoon.model.User;
 
 /**
@@ -28,6 +29,8 @@ public class MotmFormServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	@Inject
 	private MotmDao motmDao;
+	@Inject
+	private TemplateDao templateDao;
 	
     public MotmFormServlet() {
         super();
@@ -40,14 +43,15 @@ public class MotmFormServlet extends HttpServlet {
 		} else {
 			request.getSession().setAttribute("motm" , null);
 		}
+		loadTemplate(request);
 		request.getRequestDispatcher("WEB-INF/motm-form.jsp").forward(request, response);
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Motm motm=parseMotm(request);
-		//request.getSession().setAttribute("motm", motm);
 		saveMotmInSession(request, motm);
 		motmDao.save(motm);
 		request.getSession().setAttribute("commentDefine", true);
+		loadTemplate(request);
 		response.sendRedirect("motm-form");
 	}
 	public Motm parseMotm(HttpServletRequest req) {
@@ -82,7 +86,6 @@ public class MotmFormServlet extends HttpServlet {
 		List<Motm> listMotm = new ArrayList<Motm>();
 		listMotm = motmDao.fillAllByIdUser(user.getId());
 		if(listMotm.size() > 0) {
-			//request.getSession().setAttribute("motm", listMotm.get(0));
 			saveMotmInSession(request, listMotm.get(0));
 			request.getSession().setAttribute("commentDefine", true);
 		}else {
@@ -101,5 +104,11 @@ public class MotmFormServlet extends HttpServlet {
 		request.getSession().setAttribute("year",(int) (calendar.get(Calendar.YEAR)-calendarMotm.get(Calendar.YEAR)));
 		request.getSession().setAttribute("month",(int) (calendar.get(Calendar.MONTH)-calendarMotm.get(Calendar.MONTH)));
 		request.getSession().setAttribute("day",(int) (calendar.get(Calendar.DAY_OF_MONTH)-calendarMotm.get(Calendar.DAY_OF_MONTH)));
+	}
+	public void loadTemplate(HttpServletRequest request) {
+		List<Template> listTemplate = templateDao.findAll();
+		if (listTemplate.size() > 0) {
+			request.getSession().setAttribute("template", listTemplate.get(0));
+		}
 	}
 }

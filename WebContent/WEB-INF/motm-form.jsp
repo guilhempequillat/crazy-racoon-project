@@ -18,10 +18,17 @@
 		<div class="row">
 			<div class="col-md-6 col-xs-offset-3">
 				<c:if test="${not empty user }">
+				<c:if test="${not empty template }">
 					<h2 align="center">
-						<strong>Hi ${ user.firstName } ! </strong> <br> What is your
-						mood this mounth ?
+						<strong>Hi ${ user.firstName } ! </strong> <br> ${ template.title }
 					</h2>
+					<p> ${ template.text } </p>
+				</c:if>
+				<c:if test="${empty template }">
+					<h2 align="center">
+						<strong>Hi ${ user.firstName } ! </strong> <br>
+					</h2>
+				</c:if>
 					<form action="motm-form" method="POST" role="form">
 						<div class="form-group">
 							<label>Grade : </label>

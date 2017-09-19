@@ -47,5 +47,4 @@ public class EditMemberServlet extends HttpServlet {
 		}
 		response.sendRedirect("manage-members");
 	}
-
 }
