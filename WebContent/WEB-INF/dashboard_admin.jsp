@@ -161,7 +161,7 @@
 									</div>
 
 
-									<a href="stats.html" class="btn btn-default btn-block">View
+									<a href="report-admin" class="btn btn-default btn-block">View
 										more reports</a>
 								</div>
 								<!-- /.panel-body -->
