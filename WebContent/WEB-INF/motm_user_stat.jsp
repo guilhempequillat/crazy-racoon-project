@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -20,9 +21,9 @@
 				<div class="row">
 					<div class="col-xs-8 col-xs-offset-1">
 						<div class="year">
-							<strong>2017</strong>
+							<strong>My Mood of the Year</strong>
 						</div>
-						<div class="sub_title">My Mood of the Year</div>
+						<div class="sub_title">${Date}</div>
 					</div>
 				</div>
 
@@ -37,12 +38,12 @@
 							</div>
 							<div class="col-xs-9">
 								<div class="progress-bar-container">
-									<span class="desc">Vote count: 10</span>
+									<span class="desc">Vote count: ${Rate1}</span>
 									<div class="progress">
 										<div class="progress-bar progress-bar-danger"
-											role="progressbar" aria-valuenow="10" aria-valuemin="0"
-											aria-valuemax="100" style="width: 10%">
-											<span class="">10%</span>
+											role="progressbar" aria-valuenow="${Rate1}" aria-valuemin="0"
+											aria-valuemax="100" style="width: ${Pourcent1}%">
+											<span class="">${Pourcent1}%</span>
 										</div>
 									</div>
 								</div>
@@ -58,12 +59,12 @@
 							</div>
 							<div class="col-xs-9">
 								<div class="progress-bar-container">
-									<span class="desc">Vote count: 5</span>
+									<span class="desc">Vote count: ${Rate2}</span>
 									<div class="progress">
 										<div class="progress-bar progress-bar-warning"
-											role="progressbar" aria-valuenow="5" aria-valuemin="0"
-											aria-valuemax="100" style="width: 5%">
-											<span class="">5%</span>
+											role="progressbar" aria-valuenow="${Rate2}" aria-valuemin="0"
+											aria-valuemax="100" style="width: ${Pourcent2}%">
+											<span class="">${Pourcent2}%</span>
 										</div>
 									</div>
 								</div>
@@ -79,12 +80,12 @@
 							</div>
 							<div class="col-xs-9">
 								<div class="progress-bar-container">
-									<span class="desc">Vote count: 15</span>
+									<span class="desc">Vote count: ${Rate3}</span>
 									<div class="progress">
 										<div class="progress-bar progress-bar-midsuccess"
-											role="progressbar" aria-valuenow="15" aria-valuemin="0"
-											aria-valuemax="100" style="width: 15%">
-											<span class="">15%</span>
+											role="progressbar" aria-valuenow="${Rate3}" aria-valuemin="0"
+											aria-valuemax="100" style="width: ${Pourcent3}%">
+											<span class="">${Pourcent3}%</span>
 										</div>
 									</div>
 								</div>
@@ -100,12 +101,12 @@
 							</div>
 							<div class="col-xs-9">
 								<div class="progress-bar-container">
-									<span class="desc">Vote count: 45</span>
+									<span class="desc">Vote count: ${Rate4}</span>
 									<div class="progress">
-										<div class="progress-bar progress-bar-neutral" role="progressbar"
-											aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"
-											style="width: 45%">
-											<span class="">45%</span>
+										<div class="progress-bar progress-bar-neutral"
+											role="progressbar" aria-valuenow="${Rate4}" aria-valuemin="0"
+											aria-valuemax="100" style="width: ${Pourcent4}%">
+											<span class="">${Pourcent4}%</span>
 										</div>
 									</div>
 								</div>
@@ -121,12 +122,12 @@
 							</div>
 							<div class="col-xs-9">
 								<div class="progress-bar-container">
-									<span class="desc">Vote count: 25</span>
+									<span class="desc">Vote count: ${Rate5}</span>
 									<div class="progress">
 										<div class="progress-bar progress-bar-success"
-											role="progressbar" aria-valuenow="25" aria-valuemin="0"
-											aria-valuemax="100" style="width: 25%">
-											<span class="">25%</span>
+											role="progressbar" aria-valuenow="${Rate5}" aria-valuemin="0"
+											aria-valuemax="100" style="width: ${Pourcent5}%">
+											<span class="">${Pourcent5}%</span>
 										</div>
 									</div>
 								</div>
@@ -144,13 +145,13 @@
 
 		<div class="row">
 			<div class="col-xs-3 col-xs-offset-3">
-				<img src="img/racoon1.jpg" alt="" class="img-responsive" />
+				<img src="${Picture}" alt="" class="img-responsive" />
 			</div>
 			<div class="col-xs-6">
 
 				<div class="title_mood">My Global Mood</div>
 				<div class="note">
-					<strong>4.2/5 </strong>
+					<strong>${Average}/5 </strong>
 				</div>
 			</div>
 		</div>
@@ -161,18 +162,15 @@
 				<div class="comments">
 					<h2>Comments</h2>
 
-					<!-- for each -->
-					<div class="comment-container">
-						<div class="note">
-							<img src="img/racoon1.jpg" class="mood" alt="" />
+					<c:forEach items="${motms}" var="motm">
+						<div class="comment-container">
+							<div class="note">
+								<img src="img/racoon${motm.grade}.jpg" class="mood" alt="" />
+							</div>
+							<div class="comment">${motm.comment}</div>
 						</div>
-						<div class="comment">Lorem ipsum dolor sit amet, consectetur
-							adipiscing elit. Duis nec nulla quam. Integer nisi ligula,
-							molestie id diam ac, sagittis efficitur justo. Etiam aliquam
-							aliquam dolor sed fringilla. Nullam at.</div>
-					</div>
-					
-					<!-- fin for each -->
+
+					</c:forEach>
 				</div>
 			</div>
 		</div>

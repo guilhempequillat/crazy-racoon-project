@@ -1,12 +1,17 @@
 package fr.epf.crazy_racoon.dao;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.ejb.Singleton;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import fr.epf.crazy_racoon.model.Motm;
 import fr.epf.crazy_racoon.model.User;
 
 @Singleton
