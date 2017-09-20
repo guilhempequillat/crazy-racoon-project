@@ -30,8 +30,16 @@ private Session mailSession;
 	private static final long serialVersionUID = 1L;
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	   		request.getRequestDispatcher("WEB-INF/mail.jsp").forward(request, response);
-			
+	   		if(request.getSession().getAttribute("user")!=null){
+				User currentUser = (User) request.getSession().getAttribute("user");
+				if (currentUser.getStatut()) {
+					request.getRequestDispatcher("WEB-INF/mail.jsp").forward(request, response);
+				} else {
+					request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+				}
+			}else{
+				request.getRequestDispatcher("WEB-INF/not_connected.jsp").forward(request, response);
+			}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

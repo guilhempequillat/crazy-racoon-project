@@ -36,7 +36,7 @@
 				<li><a href="stats-year-admin"> <span
 						class="fa fa-line-chart"></span> Statistics
 				</a></li>
-				<li><a href="edit-member"><i class="fa fa-user"></i> Manage Members
+				<li><a href="manage-members"><i class="fa fa-user"></i> Manage Members
 				</a></li>
 				<li><a href="mail"> <span
 						class="fa fa-envelope"></span> Mail settings

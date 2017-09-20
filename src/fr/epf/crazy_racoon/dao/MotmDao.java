@@ -14,6 +14,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.servlet.http.HttpServletRequest;
 
+import fr.epf.crazy_racoon.model.DateReport;
 import fr.epf.crazy_racoon.model.Motm;
 import fr.epf.crazy_racoon.model.User;
 
@@ -217,40 +218,32 @@ public class MotmDao {
 		return finalResult;
 	}
 
-	public List<java.sql.Date> chargeAvailableDate() {
-		List<java.sql.Date> result = em.createQuery("SELECT motmDate FROM Motm ORDER BY motmDate DESC").getResultList();
-		List<java.sql.Date> dateResult = new ArrayList<java.sql.Date>();
+	public List<DateReport> chargeAvailableDate() {
+		List<Date> result = em.createQuery("SELECT motmDate FROM Motm ORDER BY motmDate DESC").getResultList();
+		List<DateReport> dateResult = new ArrayList<DateReport>();
+		boolean findDate =false;
 
 		for (int i = 0; i < result.size(); i++) {
-			java.sql.Date motmDate = result.get(i);
+			findDate=false;
+			Date motmDate = result.get(i);
+			int motmDateMonth = motmDate.getMonth()+1;
+			int motmDateYear = motmDate.getYear()+1900;
 			if (dateResult.size() != 0) {
 				for (int j = 0; j < dateResult.size(); j++) {
-					Date thisDate = dateResult.get(j);
-					int m = thisDate.getMonth();
-					int y = thisDate.getYear();
-					int mm = motmDate.getMonth();
-					int yy = motmDate.getYear();
-					if (thisDate.getMonth() != motmDate.getMonth() || thisDate.getYear() != motmDate.getYear()) {
-						dateResult.add((java.sql.Date) motmDate);
+					DateReport thisDate = dateResult.get(j);
+					if (motmDateMonth==thisDate.getMonthNumber() && motmDateYear==thisDate.getYearNumber()) {
+						findDate=true;
 					}
 				}
+				if(!findDate){
+					DateReport thismonth = new DateReport (new SimpleDateFormat("MMMM yyyy").format(motmDate),motmDateMonth,motmDateYear);
+					dateResult.add(thismonth);
+				}
 			} else {
-				dateResult.add((java.sql.Date) motmDate);
+				DateReport thismonth = new DateReport (new SimpleDateFormat("MMMM yyyy").format(motmDate),motmDateMonth,motmDateYear);
+				dateResult.add(thismonth);
 			}
 		}
-
-		/*
-		 * Iterator<Date> iterator = result.iterator(); Iterator<Date>
-		 * iteratorFinal = dateResult.iterator(); while (iterator.hasNext()) {
-		 * Date motmDate = iterator.next(); if (dateResult.size() != 0) { for
-		 * (Iterator<Date> iteratorFinal = dateResult.iterator();
-		 * iteratorFinal.hasNext(); ) { // while (iteratorFinal.hasNext()) {
-		 * Date thisDate = iteratorFinal.next(); int m = thisDate.getMonth();
-		 * int y = thisDate.getYear(); int mm = motmDate.getMonth(); int yy =
-		 * motmDate.getYear(); if (thisDate.getMonth() != motmDate.getMonth() ||
-		 * thisDate.getYear() != motmDate.getYear()) { dateResult.add(motmDate);
-		 * } } }else{ dateResult.add(motmDate); } }
-		 */
 		return dateResult;
 	}
 

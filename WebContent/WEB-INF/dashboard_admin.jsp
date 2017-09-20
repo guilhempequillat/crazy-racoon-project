@@ -49,10 +49,9 @@
 												class="fa fa-caret-down"></i>
 											</a>
 											<ul class="dropdown-menu dropdown-user">
-												<li><a href="#">March 2017</a></li>
-												<li><a href="#">February 2017</a></li>
-												<li><a href="#">January 2017</a></li>
-												<li><a href="#">December 2016</a></li>
+											<c:forEach items="${months}" var="month">
+												<li><a href="dashboard-admin?month=${month.monthNumber}&year=${month.yearNumber}">${month.dateString}</a></li>
+											</c:forEach>
 											</ul>
 										</div>
 										<div class="clearfix"></div>

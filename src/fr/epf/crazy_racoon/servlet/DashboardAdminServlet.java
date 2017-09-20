@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import fr.epf.crazy_racoon.dao.MotmDao;
 import fr.epf.crazy_racoon.dao.UserDao;
+import fr.epf.crazy_racoon.model.DateReport;
 import fr.epf.crazy_racoon.model.Motm;
 import fr.epf.crazy_racoon.model.User;
 
@@ -37,14 +38,15 @@ public class DashboardAdminServlet extends HttpServlet {
 				int year;
 				if(request.getSession().getAttribute("month")!=null&&request.getSession().getAttribute("year")!=null){
 					month=(int) request.getSession().getAttribute("month");
-					year=(int) request.getSession().getAttribute("year");
-					
+					year=(int) request.getSession().getAttribute("year");				
 				}else{
 					Calendar calendar = Calendar.getInstance();
 					month = calendar.get(Calendar.MONTH);
 					year = calendar.get(Calendar.YEAR);
 				}
-				motmDao.chargeAvailableDate();
+				List<DateReport> listMonth = motmDao.chargeAvailableDate();
+				request.getSession().setAttribute("months", listMonth);
+				
 				request.getSession().setAttribute("Date", month + "/" + year);
 
 				int[] rates = motmDao.rateMonth(month, year);
