@@ -17,9 +17,7 @@
 				<div class="col-lg-12">
 					<h1 class="page-header">Edit User</h1>
 				</div>
-			
 			</div>
-			
    	<div class="row">
 		<div class="col-md-6 col-md-offset-3">
 		<c:if test="${not empty user }">
@@ -41,10 +39,29 @@
 									<div class="form-group">
 										<input type="date" value="${user.stringDate}" name="birthdate" placeholder="Birthdate" id="birthdate"  class="form-control" >
 									</div>
+									<div class="checkbox">
+										<label><input id="passwordCheck" type="checkbox" name="doChangePassword" value="change"> Change Password</label>
+										<c:if test="${not empty wrongPassword == true }">
+											<c:if test="${ wrongPassword == true }">
+												<p style="color : red;">Wrong password<p>
+											</c:if> 
+											<c:if test="${ wrongPassword == false }">
+												<p style="color : green;">Password Edited<p>
+											</c:if> 
+										</c:if> 
+									</div>
+									<div id="passwordForm" style="display : none;">
+										<div class="form-group">
+											<input type="password" name="oldPassword" placeholder="Old Password"  class="form-control" >
+										</div>
+										<div class="form-group">
+											<input type="password" name="newPassword" placeholder="New Password"  class="form-control" >
+										</div>
+									</div>
 									<div class="form-group">
 										<div class="row">
 											<div class="col-sm-6 col-sm-offset-3">
-												<input type="submit" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-primary btn-block" value="Register Now">
+												<input type="submit" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-primary btn-block" value="Edit">
 											</div>
 										</div>
 									</div>
@@ -59,5 +76,14 @@
 			</c:if>
 		</div>
 	</div>
+	<script>
+		document.getElementById("passwordCheck").addEventListener("click",function(){
+			if(document.getElementById("passwordCheck").checked) {
+				document.getElementById("passwordForm").style.display="block";
+			} else {
+				document.getElementById("passwordForm").style.display="none";
+			}
+		});
+	</script>
 </body>
 </html>

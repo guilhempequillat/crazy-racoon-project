@@ -25,6 +25,7 @@ public class EditUserServlet extends HttpServlet {
 	private UserDao userDao;
    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.getSession().setAttribute("wrongPassword", null);
 		request.getRequestDispatcher("WEB-INF/edit_user.jsp").forward(request, response);
 	}
 
@@ -42,6 +43,14 @@ public class EditUserServlet extends HttpServlet {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			Date date = sdf.parse(request.getParameter("birthdate"));
 			userDao.updateOne(firstName, lastName, email, date, oldUser.getId());
+			if (request.getParameter("doChangePassword") != null && 
+					request.getParameter("oldPassword").equals(oldUser.getPassword()) == true) {
+				String newPassword = request.getParameter("newPassword");
+				userDao.updatePassword(newPassword, oldUser.getId());
+				request.getSession().setAttribute("wrongPassword", false);
+			} else {
+				request.getSession().setAttribute("wrongPassword", true);
+			}
 			request.getSession().setAttribute("user", userDao.findOne(oldUser.getId()));
 		} catch (ParseException e) {
 			e.printStackTrace();
