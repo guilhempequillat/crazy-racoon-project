@@ -217,12 +217,12 @@ public class MotmDao {
 		return finalResult;
 	}
 
-	public List<Date> chargeAvailableDate() {
-		List<Date> result = em.createQuery("SELECT motmDate FROM Motm ORDER BY motmDate DESC").getResultList();
-		List<Date> dateResult = new ArrayList<Date>();
+	public List<java.sql.Date> chargeAvailableDate() {
+		List<java.sql.Date> result = em.createQuery("SELECT motmDate FROM Motm ORDER BY motmDate DESC").getResultList();
+		List<java.sql.Date> dateResult = new ArrayList<java.sql.Date>();
 
 		for (int i = 0; i < result.size(); i++) {
-			Date motmDate = result.get(i);
+			java.sql.Date motmDate = result.get(i);
 			if (dateResult.size() != 0) {
 				for (int j = 0; j < dateResult.size(); j++) {
 					Date thisDate = dateResult.get(j);
@@ -231,11 +231,11 @@ public class MotmDao {
 					int mm = motmDate.getMonth();
 					int yy = motmDate.getYear();
 					if (thisDate.getMonth() != motmDate.getMonth() || thisDate.getYear() != motmDate.getYear()) {
-						dateResult.add(motmDate);
+						dateResult.add((java.sql.Date) motmDate);
 					}
 				}
 			} else {
-				dateResult.add(motmDate);
+				dateResult.add((java.sql.Date) motmDate);
 			}
 		}
 

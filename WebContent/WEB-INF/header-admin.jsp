@@ -46,7 +46,7 @@
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href=""><span class="glyphicon glyphicon-cog"></span>
 						Settings</a></li>
-				<li><a href="#"><span class="fa fa-sign-out"></span>
+				<li><a href="deconnection"><span class="fa fa-sign-out"></span>
 						Logout</a></li>
 			</ul>
 		</div>

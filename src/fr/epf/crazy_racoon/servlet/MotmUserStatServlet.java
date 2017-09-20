@@ -29,25 +29,34 @@ public class MotmUserStatServlet extends HttpServlet {
 
 	protected void doGet( HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		DecimalFormat df = new DecimalFormat("########.0"); 
-		
-		//initialisation de la date a afficher
-		Calendar calendar = Calendar.getInstance();
-		int month = calendar.get(Calendar.MONTH) + 1;
-		int year = calendar.get(Calendar.YEAR);
-		request.getSession().setAttribute("Date", (month - 1) + "/" + (year - 1) + " - " + month + "/" + year);
+		if(request.getSession().getAttribute("user")!=null){
+			User currentUser = (User) request.getSession().getAttribute("user");
+			if (!currentUser.getStatut()) {
+				DecimalFormat df = new DecimalFormat("########.0"); 
+				
+				//initialisation de la date a afficher
+				Calendar calendar = Calendar.getInstance();
+				int month = calendar.get(Calendar.MONTH) + 1;
+				int year = calendar.get(Calendar.YEAR);
+				request.getSession().setAttribute("Date", (month - 1) + "/" + (year - 1) + " - " + month + "/" + year);
 
-		User user = (User) request.getSession().getAttribute("user");
-		
-		long id= user.getId();
-		int[] rates = motmDao.ownRateYear(id);
-		motmDao.initialisationRates(request, rates, df);
-		
-		double average = motmDao.calculateAverage(request, rates, df);
-		motmDao.adaptPicture(request, average);
-		List<Motm> motms =motmDao.ownComments(id);
-		request.getSession().setAttribute("motms", motms);
-		request.getRequestDispatcher("WEB-INF/motm_user_stat.jsp").forward(request, response);
+				User user = (User) request.getSession().getAttribute("user");
+				
+				long id= user.getId();
+				int[] rates = motmDao.ownRateYear(id);
+				motmDao.initialisationRates(request, rates, df);
+				
+				double average = motmDao.calculateAverage(request, rates, df);
+				motmDao.adaptPicture(request, average);
+				List<Motm> motms =motmDao.ownComments(id);
+				request.getSession().setAttribute("motms", motms);
+				request.getRequestDispatcher("WEB-INF/motm_user_stat.jsp").forward(request, response);
+			} else {
+				request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+			}
+		}else{
+			request.getRequestDispatcher("WEB-INF/not_connected.jsp").forward(request, response);
+		}
 	}
 
 }

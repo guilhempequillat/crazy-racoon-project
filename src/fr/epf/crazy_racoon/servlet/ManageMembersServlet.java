@@ -28,9 +28,18 @@ public class ManageMembersServlet extends HttpServlet {
 	private UserDao userDao;
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List <User>  listu = userDao.findAll();
-		request.getSession().setAttribute("users", listu);
-		request.getRequestDispatcher("WEB-INF/manage_members.jsp").forward(request, response);
+		if(request.getSession().getAttribute("user")!=null){
+			User currentUser = (User) request.getSession().getAttribute("user");
+			if (currentUser.getStatut()) {
+				List <User>  listu = userDao.findAll();
+				request.getSession().setAttribute("users", listu);
+				request.getRequestDispatcher("WEB-INF/manage_members.jsp").forward(request, response);
+			} else {
+				request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+			}
+		}else{
+			request.getRequestDispatcher("WEB-INF/not_connected.jsp").forward(request, response);
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

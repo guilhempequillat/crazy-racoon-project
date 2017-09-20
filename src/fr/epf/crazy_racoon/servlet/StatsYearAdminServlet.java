@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import fr.epf.crazy_racoon.dao.MotmDao;
 import fr.epf.crazy_racoon.dao.UserDao;
 import fr.epf.crazy_racoon.model.Motm;
+import fr.epf.crazy_racoon.model.User;
 
 /**
  * Servlet implementation class StatsYearAdminServlet
@@ -28,12 +29,21 @@ public class StatsYearAdminServlet extends HttpServlet {
 	private String[] labelMonth = {"Jan","Feb","Mar","Apr","May","Jun","Jui","Aug","Sep","Oct","Nov","Dec"};
  
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		double[] rates = motmDao.rateMonth();
-		for(int i=0; i<rates.length;i++){
-			request.getSession().setAttribute("RateMonth"+(i+1), rates[i]);
-		}		
-		initializeLabels(request);
-		request.getRequestDispatcher("WEB-INF/stats-year-admin.jsp").forward(request, response);
+		if(request.getSession().getAttribute("user")!=null){
+			User currentUser = (User) request.getSession().getAttribute("user");
+			if (currentUser.getStatut()) {
+				double[] rates = motmDao.rateMonth();
+				for(int i=0; i<rates.length;i++){
+					request.getSession().setAttribute("RateMonth"+(i+1), rates[i]);
+				}		
+				initializeLabels(request);
+				request.getRequestDispatcher("WEB-INF/stats-year-admin.jsp").forward(request, response);
+			} else {
+				request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+			}
+		}else{
+			request.getRequestDispatcher("WEB-INF/not_connected.jsp").forward(request, response);
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

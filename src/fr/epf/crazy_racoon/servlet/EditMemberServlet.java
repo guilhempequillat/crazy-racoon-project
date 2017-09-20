@@ -27,11 +27,20 @@ public class EditMemberServlet extends HttpServlet {
 	private User userEdit;
    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String id = request.getParameter("editbutton");
-		Long i= (long) Integer.parseInt(id);
-		userEdit = userDao.findOne(i);
-		request.getSession().setAttribute("userEdit", userEdit);
-		request.getRequestDispatcher("WEB-INF/edit_member.jsp").forward(request, response);
+		if(request.getSession().getAttribute("user")!=null){
+			User currentUser = (User) request.getSession().getAttribute("user");
+			if (currentUser.getStatut()) {
+				String id = request.getParameter("editbutton");
+				Long i= (long) Integer.parseInt(id);
+				userEdit = userDao.findOne(i);
+				request.getSession().setAttribute("userEdit", userEdit);
+				request.getRequestDispatcher("WEB-INF/edit_member.jsp").forward(request, response);
+			} else {
+				request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+			}
+		}else{
+			request.getRequestDispatcher("WEB-INF/not_connected.jsp").forward(request, response);
+		}
 	}
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse response) throws ServletException, IOException {

@@ -25,8 +25,21 @@ public class EditUserServlet extends HttpServlet {
 	private UserDao userDao;
    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+<<<<<<< Updated upstream
 		request.getSession().setAttribute("wrongPassword", null);
 		request.getRequestDispatcher("WEB-INF/edit_user.jsp").forward(request, response);
+=======
+		if(request.getSession().getAttribute("user")!=null){
+			User currentUser = (User) request.getSession().getAttribute("user");
+			if (!currentUser.getStatut()) {
+				request.getRequestDispatcher("WEB-INF/edit_user.jsp").forward(request, response);
+			} else {
+				request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+			}
+		}else{
+			request.getRequestDispatcher("WEB-INF/not_connected.jsp").forward(request, response);
+		}
+>>>>>>> Stashed changes
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

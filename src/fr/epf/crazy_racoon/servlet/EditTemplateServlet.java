@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import fr.epf.crazy_racoon.dao.TemplateDao;
 import fr.epf.crazy_racoon.model.Template;
+import fr.epf.crazy_racoon.model.User;
 
 /**
  * Servlet implementation class EditTemplateServlet
@@ -23,8 +24,17 @@ public class EditTemplateServlet extends HttpServlet {
 	private TemplateDao templateDao;
  
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		loadCurrentTemplate(request);
-		request.getRequestDispatcher("WEB-INF/edit_template.jsp").forward(request, response);
+		if(request.getSession().getAttribute("user")!=null){
+			User currentUser = (User) request.getSession().getAttribute("user");
+			if (currentUser.getStatut()) {
+				loadCurrentTemplate(request);
+				request.getRequestDispatcher("WEB-INF/edit_template.jsp").forward(request, response);
+			} else {
+				request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+			}
+		}else{
+			request.getRequestDispatcher("WEB-INF/not_connected.jsp").forward(request, response);
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
