@@ -1,6 +1,9 @@
 package fr.epf.crazy_racoon.servlet;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
+import java.util.Calendar;
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -9,7 +12,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.epf.crazy_racoon.dao.MotmDao;
 import fr.epf.crazy_racoon.dao.UserDao;
+import fr.epf.crazy_racoon.model.Motm;
+import fr.epf.crazy_racoon.model.User;
 
 /**
  * Servlet implementation class DashboardAdminServlet
@@ -17,17 +23,37 @@ import fr.epf.crazy_racoon.dao.UserDao;
 @WebServlet("/dashboard-admin")
 public class DashboardAdminServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Inject
-	private UserDao userDao;
-       
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	private MotmDao motmDao;
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		DecimalFormat df = new DecimalFormat("########.0");
+		int month;
+		int year;
+		if(request.getSession().getAttribute("month")!=null&&request.getSession().getAttribute("year")!=null){
+			month=(int) request.getSession().getAttribute("month");
+			year=(int) request.getSession().getAttribute("year");
+			
+		}else{
+			Calendar calendar = Calendar.getInstance();
+			month = calendar.get(Calendar.MONTH);
+			year = calendar.get(Calendar.YEAR);
+		}
+		motmDao.chargeAvailableDate();
+		request.getSession().setAttribute("Date", month + "/" + year);
+
+		int[] rates = motmDao.rateMonth(month, year);
+		motmDao.initialisationRates(request, rates, df);
+
+		double average = motmDao.calculateAverage(request, rates, df);
+		motmDao.adaptPicture(request, average);
+		List<Motm> motms = motmDao.commentsMonth(month, year);
+		request.getSession().setAttribute("motms", motms);
 		request.getRequestDispatcher("WEB-INF/dashboard_admin.jsp").forward(request, response);
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+	
 
 }
