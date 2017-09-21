@@ -197,6 +197,7 @@ public class MotmDao {
 		Calendar calendar = Calendar.getInstance();
 		List<Motm> result = em.createQuery("FROM Motm").getResultList();
 		List<Motm> finalResult = new ArrayList<Motm>();
+		month-=1;
 		calendar.set(year, month, 1, 0, 0);
 		int nbDay = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
 

@@ -36,9 +36,9 @@ public class DashboardAdminServlet extends HttpServlet {
 				DecimalFormat df = new DecimalFormat("########.0");
 				int month;
 				int year;
-				if(request.getSession().getAttribute("month")!=null&&request.getSession().getAttribute("year")!=null){
-					month=(int) request.getSession().getAttribute("month");
-					year=(int) request.getSession().getAttribute("year");				
+				if(request.getParameter("month")!=null&&request.getParameter("year")!=null){
+					month= Integer.parseInt(request.getParameter("month"));
+					year= Integer.parseInt(request.getParameter("year"));				
 				}else{
 					Calendar calendar = Calendar.getInstance();
 					month = calendar.get(Calendar.MONTH);
