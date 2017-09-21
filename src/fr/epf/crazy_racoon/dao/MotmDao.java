@@ -34,6 +34,10 @@ public class MotmDao {
 	public List<Motm> findAll() {
 		return em.createQuery("FROM Motm").getResultList();
 	}
+	
+	public void removeSome(Long id) {
+		em.remove(em.createQuery("FROM Motm WHERE user_id=" + id).getResultList());
+	}
 
 	public List<Motm> fillAllByIdUser(Long id_user) {
 		return em.createQuery("FROM Motm WHERE user_id=" + id_user + " ORDER BY motmDate DESC").getResultList();
