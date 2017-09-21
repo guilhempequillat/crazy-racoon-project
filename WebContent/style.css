@@ -215,4 +215,22 @@ cursor: pointer;
       padding: 0; }
     body #stats .note small {
       color: #999;
-      font-size: 0.7em; }             
+      font-size: 0.7em; }
+      
+      
+      
+      	.Editble .fa-pencil {
+		display: none;
+		cursor:pointer;
+		margin-left:5px;
+	}
+		
+	.Editble:hover .fa-pencil {
+		display: inline-block;
+	}
+	.Editble span:hover .fa-pencil {display: inline-block;}
+	.Editble input:hover .fa-pencil {display: none;}
+	.input-edit {width:94%;display:inline;}
+	.panel-body {padding:0px;}
+	.table {margin-bottom:0px;}
+	             

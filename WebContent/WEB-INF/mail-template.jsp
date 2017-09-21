@@ -15,8 +15,8 @@
             <td>
                 <table style="margin:auto;" width="800">
                     <tr>
-                        <td background="../img/dark-map-background-mail.jpg" height="150" bgcolor="#7aadff" style="text-align:center;padding: 10px 10px 8px 5px;">
-                            <img src="../img/ebusiness.png" width="400" />
+                        <td background="" height="150" bgcolor="#7aadff" style="text-align:center;padding: 10px 10px 8px 5px;">
+                            <img src="img/ebusiness.png" width="400" />
                             <h2 style="color:white;margin:0;padding:0;">${mail.subject}</h2>
                         </td>
                     </tr>

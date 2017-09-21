@@ -4,6 +4,10 @@ import fr.epf.crazy_racoon.model.*;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.inject.Inject;
@@ -19,30 +23,64 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.epf.crazy_racoon.dao.MailDao;
+import fr.epf.crazy_racoon.dao.UserDao;
+import fr.epf.crazy_racoon.model.User;
 
 
 @WebServlet("/mail")
 public class MailServlet extends HttpServlet {
 
-private Mail mail= new Mail();
+//private Mail mail= new Mail();
 private Session mailSession;
 	 
 	private static final long serialVersionUID = 1L;
        
+	@Inject
+	private UserDao userDao;
+	private MailDao MailDao;
+	
+	private List <User>  listu;
+	
+	//private String content = "<body><div>toto</div></body>";
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	   		request.getRequestDispatcher("WEB-INF/mail.jsp").forward(request, response);
+		listu = userDao.findAll();
+		request.getSession().setAttribute("users", listu);
+		request.getRequestDispatcher("WEB-INF/mail.jsp").forward(request, response);
 			
 	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse response) throws ServletException, IOException {
+		Mail m;
 		try {
-			mail.sendmail();
-		} catch (MessagingException e) {
-			// TODO Auto-generated catch block
+			m=parseMail(req);
+			req.getSession().setAttribute("users", listu);
+			MailDao.save(m);
+			Mail.sendmail(Mail.listusersemail(listu),m.getSubject(),m.getContent());
+			//Mail.sendmail(Mail.listusersemail(listu),"super",content);
+		} catch(ParseException e)
+		{
+			e.printStackTrace();
+		}
+		catch (MessagingException e) {
 			e.printStackTrace();
 		} 
         
+	}
+	
+	/*
+	    //mail  = mailDao.findOne(CONSTANTE)
+        /*
+         try {
+			Mail.sendmail(Mail.listusersemail(listu),mail.getSubject(),mail.getContent());
+		} catch (MessagingException e) {
+			e.printStackTrace();
+		} 
+         */
+	private Mail parseMail(HttpServletRequest req) throws ParseException {
+		String subject = req.getParameter("name");
+		String content = req.getParameter("email-template");
+		return new Mail(subject, content);
 	}
 	
 }
