@@ -36,7 +36,7 @@
 				<li><a href="stats-year-admin"> <span
 						class="fa fa-line-chart"></span> Statistics
 				</a></li>
-				<li><a href="edit-member"><i class="fa fa-user"></i> Manage Members
+				<li><a href="manage-members"><i class="fa fa-user"></i> Manage Members
 				</a></li>
 				<li><a href="mail"> <span
 						class="fa fa-envelope"></span> Mail settings
@@ -46,7 +46,7 @@
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href=""><span class="glyphicon glyphicon-cog"></span>
 						Settings</a></li>
-				<li><a href="#"><span class="fa fa-sign-out"></span>
+				<li><a href="deconnection"><span class="fa fa-sign-out"></span>
 						Logout</a></li>
 			</ul>
 		</div>

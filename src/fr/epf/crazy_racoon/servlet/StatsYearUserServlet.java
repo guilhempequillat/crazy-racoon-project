@@ -28,17 +28,26 @@ public class StatsYearUserServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		double[] aveRates = motmDao.rateMonth();
-		for (int i = 0; i < aveRates.length; i++) {
-			request.getSession().setAttribute("RateMonth" + (i + 1), aveRates[i]);
+		if(request.getSession().getAttribute("user")!=null){
+			User currentUser = (User) request.getSession().getAttribute("user");
+			if (!currentUser.getStatut()) {
+				double[] aveRates = motmDao.rateMonth();
+				for (int i = 0; i < aveRates.length; i++) {
+					request.getSession().setAttribute("RateMonth" + (i + 1), aveRates[i]);
+				}
+				User user = (User) request.getSession().getAttribute("user");
+				double[] rates = motmDao.ownRateMonth(user.getId());
+				for (int i = 0; i < rates.length; i++) {
+					request.getSession().setAttribute("Rate2Month" + (i + 1), rates[i]);
+				}
+				initializeLabels(request);
+				request.getRequestDispatcher("WEB-INF/stats-year-user.jsp").forward(request, response);
+			} else {
+				request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+			}
+		}else{
+			request.getRequestDispatcher("WEB-INF/not_connected.jsp").forward(request, response);
 		}
-		User user = (User) request.getSession().getAttribute("user");
-		double[] rates = motmDao.ownRateMonth(user.getId());
-		for (int i = 0; i < rates.length; i++) {
-			request.getSession().setAttribute("Rate2Month" + (i + 1), rates[i]);
-		}
-		initializeLabels(request);
-		request.getRequestDispatcher("WEB-INF/stats-year-user.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -29,71 +29,34 @@ public class MotmUserStatServlet extends HttpServlet {
 
 	protected void doGet( HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		DecimalFormat df = new DecimalFormat("########.0"); 
-		
-		//initialisation de la date a afficher
-		Calendar calendar = Calendar.getInstance();
-		int month = calendar.get(Calendar.MONTH) + 1;
-		int year = calendar.get(Calendar.YEAR);
-		request.getSession().setAttribute("Date", (month - 1) + "/" + (year - 1) + " - " + month + "/" + year);
+		if(request.getSession().getAttribute("user")!=null){
+			User currentUser = (User) request.getSession().getAttribute("user");
+			if (!currentUser.getStatut()) {
+				DecimalFormat df = new DecimalFormat("########.0"); 
+				
+				//initialisation de la date a afficher
+				Calendar calendar = Calendar.getInstance();
+				int month = calendar.get(Calendar.MONTH) + 1;
+				int year = calendar.get(Calendar.YEAR);
+				request.getSession().setAttribute("Date", (month - 1) + "/" + (year - 1) + " - " + month + "/" + year);
 
-		User user = (User) request.getSession().getAttribute("user");
-		
-		// user.getId();
-		long id= 16;
-		int[] rates = motmDao.ownRateYear(id);
-		initialisationRates(request, rates, df);
-		
-		double average = calculateAverage(request, rates, df);
-		adaptPicture(request, average);
-		List<Motm> motms =motmDao.ownComments(id);
-		request.getSession().setAttribute("motms", motms);
-		request.getRequestDispatcher("WEB-INF/motm_user_stat.jsp").forward(request, response);
-	}
-	
-	public void initialisationRates(HttpServletRequest request, int[] rates, DecimalFormat df){
-		for (int i = 0; i < rates.length - 1; i++) {
-			request.getSession().setAttribute("Rate" + (i + 1), rates[i]);
-			double number = rates[i];
-			double total = rates[5];
-			double pourcent = number / total * 100;
-			String str = df.format(pourcent); 
-			double pourcentStr = Double.parseDouble(str.replace(',', '.'));
-			if (pourcent != 0) {
-				request.getSession().setAttribute("Pourcent" + (i + 1), pourcentStr);
+				User user = (User) request.getSession().getAttribute("user");
+				
+				long id= user.getId();
+				int[] rates = motmDao.ownRateYear(id);
+				motmDao.initialisationRates(request, rates, df);
+				
+				double average = motmDao.calculateAverage(request, rates, df);
+				motmDao.adaptPicture(request, average);
+				List<Motm> motms =motmDao.ownComments(id);
+				request.getSession().setAttribute("motms", motms);
+				request.getRequestDispatcher("WEB-INF/motm_user_stat.jsp").forward(request, response);
 			} else {
-				request.getSession().setAttribute("Pourcent" + (i + 1), 0);
+				request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 			}
-		}
-	}
-	
-	public double calculateAverage(HttpServletRequest request, int[] rates, DecimalFormat df){
-		int sum=0;
-		for (int i = 0; i < rates.length - 1; i++) {
-			sum += rates[i]*(i+1);
-		}		
-		double sumDouble = sum;
-		double total = rates[5];
-		double average = sumDouble/total;
-		String str = df.format(average); 
-		double averageStr = Double.parseDouble(str.replace(',', '.'));
-		request.getSession().setAttribute("Average", averageStr);
-		return average;
-	}
-	
-	public void adaptPicture (HttpServletRequest request, Double average){
-		if(average<=1){
-			request.getSession().setAttribute("Picture", "img/racoon1.jpg");
-		}else if(average<=2){
-			request.getSession().setAttribute("Picture", "img/racoon2.jpg");
-		}else if (average<=3){
-			request.getSession().setAttribute("Picture", "img/racoon3.jpg");
-		}else if(average<=4){
-			request.getSession().setAttribute("Picture", "img/racoon4.jpg");
 		}else{
-			request.getSession().setAttribute("Picture", "img/racoon5.jpg");
+			request.getRequestDispatcher("WEB-INF/not_connected.jsp").forward(request, response);
 		}
-					
 	}
 
 }

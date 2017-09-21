@@ -50,6 +50,14 @@ public class UserDao {
 		em.flush();
 	}
 	
+	public void updatePassword(String password, Long id) {
+		User user = em.find(User.class, id);
+		if (!password.equals(user.getPassword())) {
+			user.setPassword(password);
+		}
+		em.flush();
+	}
+	
 	public void removeOne(Long id){
 		em.remove(findOne(id));
 	}

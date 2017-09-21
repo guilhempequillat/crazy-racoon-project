@@ -39,6 +39,7 @@ public class ConnectionServlet extends HttpServlet {
 			User u = iterator.next();
 			if(u.getPassword().equals(password)==true && u.getEmail().equals(email)==true){
 				req.getSession().setAttribute("user", u);
+				req.getSession().setAttribute("connect", true);
 				if (u.getStatut()){
 					resp.sendRedirect("dashboard-admin");
 				}else{
@@ -48,6 +49,7 @@ public class ConnectionServlet extends HttpServlet {
 			}
 		}
 		if(find==false){
+			req.getSession().setAttribute("connect", false);
 			resp.sendRedirect("register");
 		}
 	}

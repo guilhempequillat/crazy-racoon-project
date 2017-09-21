@@ -48,6 +48,16 @@ private Session mailSession;
 		request.getSession().setAttribute("users", listu);
 		request.getRequestDispatcher("WEB-INF/mail.jsp").forward(request, response);
 			
+	   		if(request.getSession().getAttribute("user")!=null){
+				User currentUser = (User) request.getSession().getAttribute("user");
+				if (currentUser.getStatut()) {
+					request.getRequestDispatcher("WEB-INF/mail.jsp").forward(request, response);
+				} else {
+					request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+				}
+			}else{
+				request.getRequestDispatcher("WEB-INF/not_connected.jsp").forward(request, response);
+			}
 	}
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse response) throws ServletException, IOException {

@@ -21,12 +21,22 @@ import fr.epf.crazy_racoon.model.User;
 @WebServlet("/add-member")
 public class AddMemberServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    
+
 	@Inject
 	private UserDao userDao;
-	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("WEB-INF/add_member.jsp").forward(request, response);
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		if(request.getSession().getAttribute("user")!=null){
+			User currentUser = (User) request.getSession().getAttribute("user");
+			if (currentUser.getStatut()) {
+				request.getRequestDispatcher("WEB-INF/add_member.jsp").forward(request, response);
+			} else {
+				request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+			}
+		}else{
+			request.getRequestDispatcher("WEB-INF/not_connected.jsp").forward(request, response);
+		}
 	}
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse response) throws ServletException, IOException {
@@ -34,11 +44,11 @@ public class AddMemberServlet extends HttpServlet {
 			String firstName = req.getParameter("firstName");
 			String lastName = req.getParameter("lastName");
 			String email = req.getParameter("email");
-			String password = firstName+lastName+"default";
+			String password = firstName + lastName + "default";
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			Date d;
 			d = sdf.parse(req.getParameter("birthdate"));
-			User u =new User(firstName, lastName, password, d,email);
+			User u = new User(firstName, lastName, password, d, email);
 			userDao.save(u);
 		} catch (ParseException e) {
 			e.printStackTrace();

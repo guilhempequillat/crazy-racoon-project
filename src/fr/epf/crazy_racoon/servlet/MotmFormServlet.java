@@ -37,14 +37,23 @@ public class MotmFormServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getSession().setAttribute("commentDefine", false);
-		if (request.getSession().getAttribute("user") != null) {
-			loadMotm(request);
-		} else {
-			request.getSession().setAttribute("motm" , null);
+		if(request.getSession().getAttribute("user")!=null){
+			User currentUser = (User) request.getSession().getAttribute("user");
+			if (!currentUser.getStatut()) {
+				request.getSession().setAttribute("commentDefine", false);
+				if (request.getSession().getAttribute("user") != null) {
+					loadMotm(request);
+				} else {
+					request.getSession().setAttribute("motm" , null);
+				}
+				loadTemplate(request);
+				request.getRequestDispatcher("WEB-INF/motm-form.jsp").forward(request, response);
+			} else {
+				request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+			}
+		}else{
+			request.getRequestDispatcher("WEB-INF/not_connected.jsp").forward(request, response);
 		}
-		loadTemplate(request);
-		request.getRequestDispatcher("WEB-INF/motm-form.jsp").forward(request, response);
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Motm motm=parseMotm(request);
