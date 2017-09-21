@@ -23,27 +23,29 @@ public class EditUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	@Inject
 	private UserDao userDao;
-   
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if(request.getSession().getAttribute("user")!=null){
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		if (request.getSession().getAttribute("user") != null) {
 			User currentUser = (User) request.getSession().getAttribute("user");
-			
+
 			if (!currentUser.getStatut()) {
 				request.getSession().setAttribute("wrongPassword", null);
 				request.getRequestDispatcher("WEB-INF/edit_user.jsp").forward(request, response);
 			} else {
 				request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 			}
-		}else{
+		} else {
 			request.getRequestDispatcher("WEB-INF/not_connected.jsp").forward(request, response);
 		}
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		saveUserChanges(request);
 		request.getRequestDispatcher("WEB-INF/edit_user.jsp").forward(request, response);
 	}
-	
+
 	public void saveUserChanges(HttpServletRequest request) {
 		User oldUser = (User) request.getSession().getAttribute("user");
 		try {
@@ -52,12 +54,12 @@ public class EditUserServlet extends HttpServlet {
 			String email = request.getParameter("email");
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			Date date = sdf.parse(request.getParameter("birthdate"));
-			
+
 			userDao.updateOne(firstName, lastName, email, date, oldUser.getId());
-			
-			if (request.getParameter("doChangePassword") != null && 
-					request.getParameter("oldPassword").equals(oldUser.getPassword()) == true) {
-				
+
+			if (request.getParameter("doChangePassword") != null
+					&& request.getParameter("oldPassword").equals(oldUser.getPassword()) == true) {
+
 				String newPassword = request.getParameter("newPassword");
 				userDao.updatePassword(newPassword, oldUser.getId());
 				request.getSession().setAttribute("wrongPassword", false);

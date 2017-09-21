@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
@@ -14,12 +14,12 @@
 <%@include file="header-admin.jsp"%>
 <body>
 
-<div class="row">
-				<div class="col-lg-12">
-					<h1 class="page-header">Manage Members</h1>
-				</div>
-			
-			</div>
+	<div class="row">
+		<div class="col-lg-12">
+			<h1 class="page-header">Manage Members</h1>
+		</div>
+
+	</div>
 
 	<div class="container">
 		<div class="row">
@@ -50,12 +50,14 @@
 									<td>${user.stringDate}</td>
 
 									<td><form action="edit-member" method="GET">
-											<input type="text" value="${user.id}" name="editbutton" style="display:none;">
-											<input type="submit" class="class="icon-edit"">
+											<input type="text" value="${user.id}" name="editbutton"
+												style="display: none;"> <input type="submit"
+												class="class="icon-edit"">
 										</form></td>
 									<td><form action="manage-members" method="POST">
-											<input type="text" value="${user.id}" name="removebutton" style="display:none;">
-											<input type="submit" class="glyphicon glyphicon-pencil">
+											<input type="text" value="${user.id}" name="removebutton"
+												style="display: none;"> <input type="submit"
+												class="glyphicon glyphicon-pencil">
 										</form></td>
 								</tr>
 							</c:forEach>
@@ -65,13 +67,9 @@
 					</table>
 					<!-- pagination -->
 					<div class="clearfix"></div>
-
 				</div>
-
 			</div>
 		</div>
-
-
 	</div>
 
 
@@ -82,5 +80,5 @@
 		<a href="dashboard-admin" class="btn btn-info btn-lg">Previous</a>
 	</div>
 </body>
-<%@include file="footer.jsp"%> 
+<%@include file="footer.jsp"%>
 </html>

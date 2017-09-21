@@ -4,7 +4,6 @@
 <html>
 <head>
 
-
 <!-- Bootstrap CSS -->
 <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
 <!-- Custom CSS -->
@@ -17,13 +16,9 @@
 </head>
 <%@include file="header-admin.jsp"%>
 <body>
-
-
 	<form action="mail" method="post">
 		<input type="submit" name="button1" value="Button 1" />
 	</form>
-
-
 
 	<div id="wrapper">
 
@@ -76,7 +71,7 @@
 												href="mail-template" target="_blank">check the email
 													template</a>)
 											</label>
-											
+
 											<textarea id="email-template" class="content" cols="" rows=""></textarea>
 										</div>
 										<div class="form-group">
@@ -120,7 +115,6 @@
 	<script type="text/javascript">
 		CKEDITOR.replace("email-template");
 	</script>
-
 
 </body>
 <%@include file="footer.jsp"%>

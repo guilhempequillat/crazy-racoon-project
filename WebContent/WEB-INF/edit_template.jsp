@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -13,34 +13,37 @@
 </head>
 <%@include file="header-admin.jsp"%>
 <body>
-<div class="row">
-				<div class="col-lg-12">
-					<h1 class="page-header">Edit MOTM Template</h1>
-				</div>
-			
-			</div>
+	<div class="row">
+		<div class="col-lg-12">
+			<h1 class="page-header">Edit MOTM Template</h1>
+		</div>
+
+	</div>
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-6 col-xs-offset-3">
-			<h1>Edit Template</h1>
+				<h1>Edit Template</h1>
 				<form action="edit-template" method="POST" role="form">
 					<div class="form-group">
-						<label>Title</label>
-						<input type="text" name="title" placeholder="Title" class="form-control">
+						<label>Title</label> <input type="text" name="title"
+							placeholder="Title" class="form-control">
 					</div>
 					<div class="form-group">
 						<label>Text</label>
-						<textarea type="text" name="text" placeholder="Text" clos="" rows="" class="form-control"></textarea>
+						<textarea type="text" name="text" placeholder="Text" clos=""
+							rows="" class="form-control"></textarea>
 					</div>
-					<input type="submit" value="Save" class="form-control btn btn-primary btn-block">
+					<input type="submit" value="Save"
+						class="form-control btn btn-primary btn-block">
 				</form>
 				<c:if test="${not empty template }">
 					<p>Last modification : ${ template.date }</p>
-					<br><br>
+					<br>
+					<br>
 					<h2 align="center">
 						<strong>Hi "User name" ! </strong> <br> ${ template.title }
 					</h2>
-					<p> ${ template.text } </p>
+					<p>${ template.text }</p>
 					<form action="#" role="form">
 						<div class="form-group">
 							<label>Grade : </label>
@@ -86,7 +89,8 @@
 						<input type="button" value="Send" id="btn"
 							class="form-control btn btn-primary btn-block">
 					</form>
-					<br><br>
+					<br>
+					<br>
 				</c:if>
 				<c:if test="${empty template }">
 					There is not template yet !

@@ -44,14 +44,14 @@
 
 <body onload="displayLineChart();">
 
-<div class="row">
-				<div class="col-lg-12">
-					<h1 class="page-header">Statistic</h1>
-				</div>
-			
-			</div>
-			
-<h1 style="text-align:center;">Rates over the last 12 months</h1>
+	<div class="row">
+		<div class="col-lg-12">
+			<h1 class="page-header">Statistic</h1>
+		</div>
+
+	</div>
+
+	<h1 style="text-align: center;">Rates over the last 12 months</h1>
 	<div class="box">
 		<canvas id="lineChart"
 			style="height: 450px; width: 800px; padding-left: 0; padding-right: 0; margin-left: auto; margin-right: auto; display: block;"></canvas>

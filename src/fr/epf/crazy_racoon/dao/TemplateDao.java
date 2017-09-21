@@ -14,16 +14,19 @@ import fr.epf.crazy_racoon.model.User;
 public class TemplateDao {
 	@PersistenceContext
 	private EntityManager em;
-	
+
 	public void save(Template template) {
 		em.persist(template);
 	}
+
 	public void deleteTemplateById(Long id) {
 		em.remove(findOne(id));
 	}
+
 	public Template findOne(Long id) {
 		return em.find(Template.class, id);
 	}
+
 	public List<Template> findAll() {
 		return em.createQuery("FROM Template").getResultList();
 	}

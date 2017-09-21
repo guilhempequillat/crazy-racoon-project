@@ -15,12 +15,13 @@ import fr.epf.crazy_racoon.model.User;
 @WebServlet("/deconnection")
 public class DeconnectionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if(request.getSession().getAttribute("user")!=null){
-			request.getSession().setAttribute("user",null);
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		if (request.getSession().getAttribute("user") != null) {
+			request.getSession().setAttribute("user", null);
 			response.sendRedirect("register");
-		}else{
+		} else {
 			request.getRequestDispatcher("WEB-INF/not_connected.jsp").forward(request, response);
 		}
 	}

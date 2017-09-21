@@ -27,71 +27,66 @@ import fr.epf.crazy_racoon.dao.MailDao;
 import fr.epf.crazy_racoon.dao.UserDao;
 import fr.epf.crazy_racoon.model.User;
 
-
 @WebServlet("/mail")
 public class MailServlet extends HttpServlet {
 
-//private Mail mail= new Mail();
-private Session mailSession;
-	 
+	// private Mail mail= new Mail();
+	private Session mailSession;
+
 	private static final long serialVersionUID = 1L;
-       
+
 	@Inject
 	private UserDao userDao;
 	private MailDao MailDao;
-	
-	private List <User>  listu;
-	
-	//private String content = "<body><div>toto</div></body>";
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	private List<User> listu;
+
+	// private String content = "<body><div>toto</div></body>";
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		listu = userDao.findAll();
 		request.getSession().setAttribute("users", listu);
 		request.getRequestDispatcher("WEB-INF/mail.jsp").forward(request, response);
-			
-	   		if(request.getSession().getAttribute("user")!=null){
-				User currentUser = (User) request.getSession().getAttribute("user");
-				
-				if (currentUser.getStatut()) {
-					request.getRequestDispatcher("WEB-INF/mail.jsp").forward(request, response);
-				} else {
-					request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
-				}
-			}else{
-				request.getRequestDispatcher("WEB-INF/not_connected.jsp").forward(request, response);
+
+		if (request.getSession().getAttribute("user") != null) {
+			User currentUser = (User) request.getSession().getAttribute("user");
+
+			if (currentUser.getStatut()) {
+				request.getRequestDispatcher("WEB-INF/mail.jsp").forward(request, response);
+			} else {
+				request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 			}
+		} else {
+			request.getRequestDispatcher("WEB-INF/not_connected.jsp").forward(request, response);
+		}
 	}
+
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse response) throws ServletException, IOException {
 		Mail m;
 		try {
-			m=parseMail(req);
+			m = parseMail(req);
 			req.getSession().setAttribute("users", listu);
 			MailDao.save(m);
-			Mail.sendmail(Mail.listusersemail(listu),m.getSubject(),m.getContent());
-			//Mail.sendmail(Mail.listusersemail(listu),"super",content);
-		} catch(ParseException e)
-		{
+			Mail.sendmail(Mail.listusersemail(listu), m.getSubject(), m.getContent());
+			// Mail.sendmail(Mail.listusersemail(listu),"super",content);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		} catch (MessagingException e) {
+
 			e.printStackTrace();
 		}
-		catch (MessagingException e) {
-			e.printStackTrace();
-		} 
-        
+
 	}
-	
+
 	/*
-	    //mail  = mailDao.findOne(CONSTANTE)
-        /*
-         try {
-			Mail.sendmail(Mail.listusersemail(listu),mail.getSubject(),mail.getContent());
-		} catch (MessagingException e) {
-			e.printStackTrace();
-		} 
-         */
+	 * //mail = mailDao.findOne(CONSTANTE) /* try {
+	 * Mail.sendmail(Mail.listusersemail(listu),mail.getSubject(),mail.
+	 * getContent()); } catch (MessagingException e) { e.printStackTrace(); }
+	 */
 	private Mail parseMail(HttpServletRequest req) throws ParseException {
 		String subject = req.getParameter("name");
 		String content = req.getParameter("email-template");
 		return new Mail(subject, content);
 	}
-	
 }

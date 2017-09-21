@@ -24,32 +24,32 @@ import fr.epf.crazy_racoon.model.User;
 @WebServlet("/connection")
 public class ConnectionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-     
+
 	@Inject
 	private UserDao userDao;
-	
+
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String email = req.getParameter("email");
 		String password = req.getParameter("password");
-		
-		List <User>  listu = userDao.findAll();
-		Iterator <User> iterator = listu.iterator();
-		boolean find =false;
-		while(iterator.hasNext()&&find==false){
+
+		List<User> listu = userDao.findAll();
+		Iterator<User> iterator = listu.iterator();
+		boolean find = false;
+		while (iterator.hasNext() && find == false) {
 			User u = iterator.next();
-			if(u.getPassword().equals(password)==true && u.getEmail().equals(email)==true){
+			if (u.getPassword().equals(password) == true && u.getEmail().equals(email) == true) {
 				req.getSession().setAttribute("user", u);
 				req.getSession().setAttribute("connect", true);
-				if (u.getStatut()){
+				if (u.getStatut()) {
 					resp.sendRedirect("dashboard-admin");
-				}else{
+				} else {
 					resp.sendRedirect("motm-form");
 				}
-				find=true;
+				find = true;
 			}
 		}
-		if(find==false){
+		if (find == false) {
 			req.getSession().setAttribute("connect", false);
 			resp.sendRedirect("register");
 		}

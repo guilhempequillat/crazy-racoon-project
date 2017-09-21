@@ -44,12 +44,12 @@ public class MotmDao {
 	}
 
 	public double[] ratePerMonth() {
-		double sum ;
+		double sum;
 		double total;
-		
+
 		List<Motm> result = em.createQuery("FROM Motm").getResultList();
 		double[] average = new double[12];
-		
+
 		Calendar calendar = Calendar.getInstance();
 		int month = calendar.get(Calendar.MONTH);
 		int year = calendar.get(Calendar.YEAR);
@@ -88,7 +88,7 @@ public class MotmDao {
 	public double[] ownRatePerMonth(Long userId) {
 		List<Motm> result = em.createQuery("FROM Motm").getResultList();
 		double[] rates = new double[12];
-		
+
 		Calendar calendar = Calendar.getInstance();
 		int month = calendar.get(Calendar.MONTH);
 		int year = calendar.get(Calendar.YEAR);
@@ -122,7 +122,7 @@ public class MotmDao {
 	public int[] ownRateDuringYear(Long userId) {
 		List<Motm> result = em.createQuery("FROM Motm").getResultList();
 		int[] rates = new int[6];
-		
+
 		Calendar calendar = Calendar.getInstance();
 		int month = calendar.get(Calendar.MONTH);
 		int year = calendar.get(Calendar.YEAR) - 1;
@@ -150,7 +150,7 @@ public class MotmDao {
 	public int[] rateDuringMonth(int month, int year) {
 		List<Motm> result = em.createQuery("FROM Motm").getResultList();
 		int[] rates = new int[6];
-		
+
 		Calendar calendar = Calendar.getInstance();
 		calendar.set(year, month - 1, 1, 0, 0);
 		int nbDay = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
@@ -174,7 +174,7 @@ public class MotmDao {
 	public List<Motm> ownCommentsDuringYear(Long userId) {
 		List<Motm> result = em.createQuery("FROM Motm").getResultList();
 		List<Motm> finalResult = new ArrayList<Motm>();
-		
+
 		Calendar calendar = Calendar.getInstance();
 		int month = calendar.get(Calendar.MONTH);
 		int year = calendar.get(Calendar.YEAR) - 1;
@@ -200,9 +200,9 @@ public class MotmDao {
 	public List<Motm> commentsDuringMonth(int month, int year) {
 		List<Motm> result = em.createQuery("FROM Motm").getResultList();
 		List<Motm> finalResult = new ArrayList<Motm>();
-		
+
 		Calendar calendar = Calendar.getInstance();
-		month-=1;
+		month -= 1;
 		calendar.set(year, month, 1, 0, 0);
 		int nbDay = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
 
@@ -224,26 +224,28 @@ public class MotmDao {
 	public List<DateReport> chargeAvailableDate() {
 		List<Date> result = em.createQuery("SELECT motmDate FROM Motm ORDER BY motmDate DESC").getResultList();
 		List<DateReport> dateResult = new ArrayList<DateReport>();
-		boolean findDate =false;
+		boolean findDate = false;
 
 		for (int i = 0; i < result.size(); i++) {
-			findDate=false;
+			findDate = false;
 			Date motmDate = result.get(i);
-			int motmDateMonth = motmDate.getMonth()+1;
-			int motmDateYear = motmDate.getYear()+1900;
+			int motmDateMonth = motmDate.getMonth() + 1;
+			int motmDateYear = motmDate.getYear() + 1900;
 			if (dateResult.size() != 0) {
 				for (int j = 0; j < dateResult.size(); j++) {
 					DateReport thisDate = dateResult.get(j);
-					if (motmDateMonth==thisDate.getMonthNumber() && motmDateYear==thisDate.getYearNumber()) {
-						findDate=true;
+					if (motmDateMonth == thisDate.getMonthNumber() && motmDateYear == thisDate.getYearNumber()) {
+						findDate = true;
 					}
 				}
-				if(!findDate){
-					DateReport thismonth = new DateReport (new SimpleDateFormat("MMMM yyyy").format(motmDate),motmDateMonth,motmDateYear);
+				if (!findDate) {
+					DateReport thismonth = new DateReport(new SimpleDateFormat("MMMM yyyy").format(motmDate),
+							motmDateMonth, motmDateYear);
 					dateResult.add(thismonth);
 				}
 			} else {
-				DateReport thismonth = new DateReport (new SimpleDateFormat("MMMM yyyy").format(motmDate),motmDateMonth,motmDateYear);
+				DateReport thismonth = new DateReport(new SimpleDateFormat("MMMM yyyy").format(motmDate), motmDateMonth,
+						motmDateYear);
 				dateResult.add(thismonth);
 			}
 		}
@@ -293,15 +295,14 @@ public class MotmDao {
 			request.getSession().setAttribute("Picture", "img/racoon5.jpg");
 		}
 	}
-	
+
 	public String toStringCsv() {
 		List<Motm> list = findAll();
 		String result = "";
 		result = "Grade,Comment,Date\n";
-		for(int i = 0 ; i<list.size() ; i++) {
-			result += list.get(i).getGrade()+","
-				+list.get(i).getComment()+","
-				+list.get(i).getDateToString()+"\n";
+		for (int i = 0; i < list.size(); i++) {
+			result += list.get(i).getGrade() + "," + list.get(i).getComment() + "," + list.get(i).getDateToString()
+					+ "\n";
 		}
 		return result;
 	}

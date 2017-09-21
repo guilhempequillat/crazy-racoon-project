@@ -13,27 +13,27 @@
 </head>
 <%@include file="header-user.jsp"%>
 <body>
-<div class="row">
-				<div class="col-lg-12">
-					<h1 class="page-header">MOTM Form</h1>
-				</div>
-			
-			</div>
+	<div class="row">
+		<div class="col-lg-12">
+			<h1 class="page-header">MOTM Form</h1>
+		</div>
+
+	</div>
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-6 col-xs-offset-3">
 				<c:if test="${not empty user }">
-				<c:if test="${not empty template }">
-					<h2 align="center">
-						<strong>Hi ${ user.firstName } ! </strong> <br> ${ template.title }
-					</h2>
-					<p> ${ template.text } </p>
-				</c:if>
-				<c:if test="${empty template }">
-					<h2 align="center">
-						<strong>Hi ${ user.firstName } ! </strong> <br>
-					</h2>
-				</c:if>
+					<c:if test="${not empty template }">
+						<h2 align="center">
+							<strong>Hi ${ user.firstName } ! </strong> <br> ${ template.title }
+						</h2>
+						<p>${ template.text }</p>
+					</c:if>
+					<c:if test="${empty template }">
+						<h2 align="center">
+							<strong>Hi ${ user.firstName } ! </strong> <br>
+						</h2>
+					</c:if>
 					<form action="motm-form" method="POST" role="form">
 						<div class="form-group">
 							<label>Grade : </label>
@@ -97,62 +97,61 @@
 							<div class="col-xs-9">
 								<div class="panel panel-default">
 									<div class="panel-heading">
-										<strong>${ user.firstName  }</strong>
-										 <span class="text-muted">
-										 commented
-										<c:choose>
-										  <c:when test="${year > 0 }">
-											  <c:if test="${year > 1 }">
-											 		${ year } years ago</span>
-											 	</c:if>
-											 	<c:if test="${year == 1 }">
-											 		${ year } year ago</span>
-											 	</c:if>
-										  </c:when>
-										  <c:otherwise> 
-										  	<c:choose>
-										  		<c:when test="${month > 0 }">
-											  		<c:if test="${month > 1 }">
-												 		${ month } months ago</span>
-												 	</c:if>
-												 	<c:if test="${month == 1 }">
-												 		${ month } month ago</span>
-												 	</c:if>
-										  		</c:when>
-										  		<c:otherwise> 
-										  			<c:choose>
-											  			<c:when test="${day >= 0 }">
-												  			<c:if test="${day > 1 }">
-														 		${ day } days ago</span>
-														 	</c:if>
-														 	<c:if test="${day == 1 }">
-														 		yesterday</span>
-														 	</c:if>
-														 	<c:if test="${ day == 0 }">
-														 		today</span>
-														 	</c:if>
-											  			</c:when>
-											  			<c:otherwise> 
-														 		</span>
-														 </c:otherwise>
-											  		</c:choose>
-										  		</c:otherwise>
-										  	</c:choose>
-										  </c:otherwise>
-										</c:choose>
-									</div>
-									<div class="panel-body">
-										<p>${ motm.comment }</p>
-									</div>
-									<!-- /panel-body -->
-								</div>
-								<!-- /panel panel-default -->
-							</div>
-						</div>
+										<strong>${ user.firstName  }</strong> <span class="text-muted">
+											commented <c:choose>
+												<c:when test="${year > 0 }">
+													<c:if test="${year > 1 }">
+											 		${ year } years ago
+										</span>
 					</c:if>
+					<c:if test="${year == 1 }">
+											 		${ year } year ago</span>
+					</c:if>
+					</c:when>
+					<c:otherwise>
+						<c:choose>
+							<c:when test="${month > 0 }">
+								<c:if test="${month > 1 }">
+												 		${ month } months ago</span>
+								</c:if>
+								<c:if test="${month == 1 }">
+												 		${ month } month ago</span>
+								</c:if>
+							</c:when>
+							<c:otherwise>
+								<c:choose>
+									<c:when test="${day >= 0 }">
+										<c:if test="${day > 1 }">
+														 		${ day } days ago</span>
+										</c:if>
+										<c:if test="${day == 1 }">
+														 		yesterday</span>
+										</c:if>
+										<c:if test="${ day == 0 }">
+														 		today</span>
+										</c:if>
+									</c:when>
+									<c:otherwise>
+										</span>
+									</c:otherwise>
+								</c:choose>
+							</c:otherwise>
+						</c:choose>
+					</c:otherwise>
+					</c:choose>
 				</div>
+				<div class="panel-body">
+					<p>${ motm.comment }</p>
+				</div>
+				<!-- /panel-body -->
 			</div>
+			<!-- /panel panel-default -->
 		</div>
+	</div>
+	</c:if>
+	</div>
+	</div>
+	</div>
 	</div>
 	<script type="text/javascript">
 		$('#btn').click(function() {

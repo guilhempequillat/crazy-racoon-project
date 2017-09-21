@@ -16,7 +16,7 @@ public class Template {
 	private String title;
 	private String text;
 	private Date date;
-	
+
 	public Template(String title, String text) {
 		super();
 		this.title = title;
@@ -24,31 +24,38 @@ public class Template {
 		Timestamp stamp = new Timestamp(System.currentTimeMillis());
 		this.date = new Date(stamp.getTime());
 	}
-	
+
 	public Template() {
 	}
-	
+
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
+
 	public String getTitle() {
 		return title;
 	}
+
 	public void setTitle(String title) {
 		this.title = title;
 	}
+
 	public String getText() {
 		return text;
 	}
+
 	public void setText(String text) {
 		this.text = text;
 	}
+
 	public Date getDate() {
 		return date;
 	}
+
 	public void setDate(Date date) {
 		this.date = date;
 	}

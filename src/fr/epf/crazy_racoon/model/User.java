@@ -21,9 +21,10 @@ public class User {
 	private String stringDate;
 	private String email;
 	private Boolean statut;
-	
-	public User() {}
-	
+
+	public User() {
+	}
+
 	public User(String firstName, String lastName, String password, Date birthdate, String email) {
 		super();
 		this.firstName = firstName;
@@ -33,7 +34,7 @@ public class User {
 		this.email = email;
 		this.statut = false;
 		setStringDate();
-	}	
+	}
 
 	public Boolean getStatut() {
 		return statut;
@@ -54,20 +55,23 @@ public class User {
 	public String getFirstName() {
 		return firstName;
 	}
+
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
+
 	public String getLastName() {
 		return lastName;
 	}
+
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	
+
 	public Long getId() {
 		return id;
 	}
-	
+
 	public void setId(Long id) {
 		this.id = id;
 	}
@@ -87,7 +91,7 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
+
 	public String getStringDate() {
 		return stringDate;
 	}
@@ -96,9 +100,9 @@ public class User {
 		this.stringDate = stringDate;
 	}
 
-	public void setStringDate(){
+	public void setStringDate() {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		stringDate = sdf.format(birthdate);
 	}
-	
+
 }

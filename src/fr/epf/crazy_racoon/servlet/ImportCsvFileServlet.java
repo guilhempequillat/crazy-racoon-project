@@ -32,37 +32,38 @@ import java.io.FileWriter;
 @WebServlet("/import-file")
 public class ImportCsvFileServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    private static final String FILE_NAME = "motms.csv";
-    @Inject
-    private MotmDao motmDao;
-	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	private static final String FILE_NAME = "motms.csv";
+	@Inject
+	private MotmDao motmDao;
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		uploadFile(response);
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 	}
-	
+
 	public void uploadFile(HttpServletResponse response) {
 		String fileName = FILE_NAME;
 		try {
-			byte[] outFile =  motmDao.toStringCsv().getBytes();
+			byte[] outFile = motmDao.toStringCsv().getBytes();
 			response.reset();
-			response.setContentType( "text/csv" );
-			response.setContentLength( outFile.length );
-			response.setHeader( "Content-Disposition", "attachment; filename=\"" + FILE_NAME + "\"" );
+			response.setContentType("text/csv");
+			response.setContentLength(outFile.length);
+			response.setHeader("Content-Disposition", "attachment; filename=\"" + FILE_NAME + "\"");
 			ServletOutputStream responseOutputStream = response.getOutputStream();
 			responseOutputStream.write(outFile);
 			responseOutputStream.flush();
 			responseOutputStream.close();
-		} 
-		catch (UnsupportedEncodingException e) {
+		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
-			e.printStackTrace();		
+			e.printStackTrace();
 		}
 	}
 }

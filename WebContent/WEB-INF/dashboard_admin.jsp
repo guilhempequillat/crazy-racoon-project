@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -49,9 +49,10 @@
 												class="fa fa-caret-down"></i>
 											</a>
 											<ul class="dropdown-menu dropdown-user">
-											<c:forEach items="${months}" var="month">
-												<li><a href="dashboard-admin?month=${month.monthNumber}&year=${month.yearNumber}">${month.dateString}</a></li>
-											</c:forEach>
+												<c:forEach items="${months}" var="month">
+													<li><a
+														href="dashboard-admin?month=${month.monthNumber}&year=${month.yearNumber}">${month.dateString}</a></li>
+												</c:forEach>
 											</ul>
 										</div>
 										<div class="clearfix"></div>
@@ -196,14 +197,15 @@
 
 											<div class="row">
 												<div class="comments">
-													
+
 													<c:forEach items="${motms}" var="motm">
-													<div class="comment-container">
-														<div class="note">
-															<img class="mood" src="img/racoon${motm.grade}.jpg" alt="" />
+														<div class="comment-container">
+															<div class="note">
+																<img class="mood" src="img/racoon${motm.grade}.jpg"
+																	alt="" />
+															</div>
+															<div class="comment">${motm.comment}</div>
 														</div>
-														<div class="comment">${motm.comment}</div>
-													</div>
 													</c:forEach>
 												</div>
 											</div>
@@ -224,16 +226,16 @@
 		<!-- /#page-wrapper -->
 
 	</div>
-</footer>
+	</footer>
 
-			<!-- jQuery -->
-			<script src="../js/jquery-3.1.1.min.js"></script>
+	<!-- jQuery -->
+	<script src="../js/jquery-3.1.1.min.js"></script>
 
-			<!-- togggle.js -->
-			<script src="../js/toggle.js"></script>
+	<!-- togggle.js -->
+	<script src="../js/toggle.js"></script>
 
-			<!-- Bootstrap Core JavaScript -->
-			<script src="../js/bootstrap.min.js"></script>
+	<!-- Bootstrap Core JavaScript -->
+	<script src="../js/bootstrap.min.js"></script>
 </body>
 <%@include file="footer.jsp"%>
 </html>

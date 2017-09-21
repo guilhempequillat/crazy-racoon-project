@@ -1,13 +1,13 @@
 package fr.epf.crazy_racoon.model;
 
 public class DateReport {
-	
+
 	String dateString;
 	int monthNumber;
 	int yearNumber;
-	
-	public DateReport(String monthString, int monthNumber, int yearNumber){
-		this.dateString =monthString;
+
+	public DateReport(String monthString, int monthNumber, int yearNumber) {
+		this.dateString = monthString;
 		this.monthNumber = monthNumber;
 		this.yearNumber = yearNumber;
 	}

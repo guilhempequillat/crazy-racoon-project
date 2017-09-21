@@ -37,37 +37,37 @@ public class DashboardAdminServlet extends HttpServlet {
 				DecimalFormat df = new DecimalFormat("########.0");
 				int month;
 				int year;
-				
-				//si l'année et le mois ont été pré-choisit
+
+				// si l'année et le mois ont été pré-choisit
 				if (request.getParameter("month") != null && request.getParameter("year") != null) {
 					month = Integer.parseInt(request.getParameter("month"));
 					year = Integer.parseInt(request.getParameter("year"));
 				} else {
-					//sinon mois précédent choisit par défaut
+					// sinon mois précédent choisit par défaut
 					Calendar calendar = Calendar.getInstance();
 					month = calendar.get(Calendar.MONTH);
 					year = calendar.get(Calendar.YEAR);
 				}
-				
-				//Chargement de la liste déroulante
+
+				// Chargement de la liste déroulante
 				List<DateReport> listMonth = motmDao.chargeAvailableDate();
 				request.getSession().setAttribute("months", listMonth);
 
-				//initialisation de la date
+				// initialisation de la date
 				request.getSession().setAttribute("Date", month + "/" + year);
 
-				//initialisation des notes du mois
+				// initialisation des notes du mois
 				int[] rates = motmDao.rateDuringMonth(month, year);
 
-				if (rates[5] > 0) {//s'il y a des données
-					//Calcul des pourcentage, de la moyenne
+				if (rates[5] > 0) {// s'il y a des données
+					// Calcul des pourcentage, de la moyenne
 					motmDao.initialisationPourcentRates(request, rates, df);
 					double average = motmDao.calculateAverage(request, rates, df);
-					
-					//initialisation de l'image et des commentaires
+
+					// initialisation de l'image et des commentaires
 					motmDao.adaptPicture(request, average);
 					List<Motm> motms = motmDao.commentsDuringMonth(month, year);
-					
+
 					request.getSession().setAttribute("motms", motms);
 				}
 				request.getRequestDispatcher("WEB-INF/dashboard_admin.jsp").forward(request, response);
