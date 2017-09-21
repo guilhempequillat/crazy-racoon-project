@@ -289,7 +289,18 @@ public class MotmDao {
 		} else {
 			request.getSession().setAttribute("Picture", "img/racoon5.jpg");
 		}
-
+	}
+	
+	public String toStringCsv() {
+		List<Motm> list = findAll();
+		String result = "";
+		result = "Grade,Comment,Date\n";
+		for(int i = 0 ; i<list.size() ; i++) {
+			result += list.get(i).getGrade()+","
+				+list.get(i).getComment()+","
+				+list.get(i).getDateToString()+"\n";
+		}
+		return result;
 	}
 
 }

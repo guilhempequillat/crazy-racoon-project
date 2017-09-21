@@ -1,5 +1,6 @@
 package fr.epf.crazy_racoon.model;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -49,7 +50,6 @@ public class Motm {
 	public Long getId() {
 		return id;
 	}
-	
 	public void setId(Long id) {
 		this.id = id;
 	}
@@ -64,5 +64,11 @@ public class Motm {
 	}
 	public void setComment(String comment) {
 		this.comment = comment;
+	}
+	public String getDateToString() {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(motmDate);
+		return calendar.get(Calendar.MONTH)+"/"+calendar.get(Calendar.DAY_OF_MONTH)
+			+"/"+calendar.get(Calendar.YEAR);
 	}
 }
