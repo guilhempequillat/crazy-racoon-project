@@ -1,5 +1,7 @@
 <script src="https://code.jquery.com/jquery.js" type="text/javascript"></script>
-<script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js" type="text/javascript"></script>
+<script
+	src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"
+	type="text/javascript"></script>
 
 <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
 
@@ -30,16 +32,16 @@
 				<li class="active"><a href="edit-template"> <span
 						class="fa fa-pencil"></span> MOTM template
 				</a></li>
-				<li><a href="report-admin"> <span
-						class="fa fa-calendar" ></span> Report
+				<li><a href="import-file"> <span class="fa fa-calendar"></span>
+						Report
 				</a></li>
 				<li><a href="stats-year-admin"> <span
 						class="fa fa-line-chart"></span> Statistics
 				</a></li>
-				<li><a href="manage-members"><i class="fa fa-user"></i> Manage Members
-				</a></li>
-				<li><a href="mail"> <span
-						class="fa fa-envelope"></span> Mail settings
+				<li><a href="manage-members"><i class="fa fa-user"></i>
+						Manage Members </a></li>
+				<li><a href="mail"> <span class="fa fa-envelope"></span>
+						Mail settings
 				</a></li>
 
 			</ul>
