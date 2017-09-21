@@ -64,12 +64,7 @@ public class RegistrationServlet extends HttpServlet {
 			}
 		}
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-<<<<<<< HEAD
 		Date d = sdf.parse(dateToParse);
 		return new User(firstName, lastName, password, d,email);
-=======
-		Date d = sdf.parse(req.getParameter("birthdate"));
-		return new User(firstName, lastName, password, d, email);
->>>>>>> dd4d17a661fbda96d8e33fb653969b18e786c3f5
 	}
 }
