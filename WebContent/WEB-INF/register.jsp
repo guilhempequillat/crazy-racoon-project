@@ -5,9 +5,11 @@
 
 <script src="bootstrap/js/jquery-3.1.1.min.js" type="text/javascript"></script>
 <script src="bootstrap/js/bootstrap.js" type="text/javascript"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
+  
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
 <head>
 
 <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
@@ -97,9 +99,10 @@
 											class="form-control" placeholder="Password">
 									</div>
 									<div class="form-group">
-										<input type="date" name="birthdate" placeholder="Birthdate"
+										<input type="text" name="birthdate" placeholder="Birthdate"
 											id="birthdate" class="form-control">
 									</div>
+			
 
 									<div class="form-group">
 										<div class="row">
@@ -127,7 +130,6 @@
 
 	<script type="text/javascript">
 		$(function() {
-
 			$('#login-form-link').click(function(e) {
 				$("#login-form").delay(100).fadeIn(100);
 				$("#register-form").fadeOut(100);
@@ -142,8 +144,11 @@
 				$(this).addClass('active');
 				e.preventDefault();
 			});
-
 		});
+		$(function () {
+            $('#birthdate').datepicker({
+            });
+        });
 	</script>
 
 </body>

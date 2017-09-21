@@ -52,8 +52,19 @@ public class RegistrationServlet extends HttpServlet {
 		String lastName = req.getParameter("lastName");
 		String email = req.getParameter("email");
 		String password = req.getParameter("password");
+		String dateForm = req.getParameter("birthdate");
+		String dateToParse = dateForm; 
+		if( dateForm.split("/").length > 0 ) {
+			dateToParse = "";
+			for( int i = 0 ; i <  dateForm.split("/").length ; i++ ) {
+				if ( i == 0 ) {
+					dateToParse = dateForm.split("/")[i];
+				}
+				dateToParse += "-"+dateForm.split("/")[i];
+			}
+		}
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		Date d = sdf.parse(req.getParameter("birthdate"));
+		Date d = sdf.parse(dateToParse);
 		return new User(firstName, lastName, password, d,email);
 	}
 }
