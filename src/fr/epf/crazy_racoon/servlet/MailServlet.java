@@ -32,6 +32,7 @@ private Session mailSession;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	   		if(request.getSession().getAttribute("user")!=null){
 				User currentUser = (User) request.getSession().getAttribute("user");
+				
 				if (currentUser.getStatut()) {
 					request.getRequestDispatcher("WEB-INF/mail.jsp").forward(request, response);
 				} else {

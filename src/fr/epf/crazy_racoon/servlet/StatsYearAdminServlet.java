@@ -31,11 +31,16 @@ public class StatsYearAdminServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if(request.getSession().getAttribute("user")!=null){
 			User currentUser = (User) request.getSession().getAttribute("user");
+			
 			if (currentUser.getStatut()) {
-				double[] rates = motmDao.rateMonth();
+				
+				//initialisation des notes de toute la boite
+				double[] rates = motmDao.ratePerMonth();
 				for(int i=0; i<rates.length;i++){
 					request.getSession().setAttribute("RateMonth"+(i+1), rates[i]);
 				}		
+				
+				//initialisation des labels
 				initializeLabels(request);
 				request.getRequestDispatcher("WEB-INF/stats-year-admin.jsp").forward(request, response);
 			} else {
@@ -54,6 +59,7 @@ public class StatsYearAdminServlet extends HttpServlet {
 	private void initializeLabels (HttpServletRequest request){
 		Calendar calendar = Calendar.getInstance();
 		int month = calendar.get(Calendar.MONTH)+1;
+		
 		for(int i=0;i<12;i++){
 			String m = labelMonth[month];
 			request.getSession().setAttribute("LabelMonth"+(i+1), m);

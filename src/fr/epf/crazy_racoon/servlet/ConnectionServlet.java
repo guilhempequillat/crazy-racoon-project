@@ -32,6 +32,7 @@ public class ConnectionServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String email = req.getParameter("email");
 		String password = req.getParameter("password");
+		
 		List <User>  listu = userDao.findAll();
 		Iterator <User> iterator = listu.iterator();
 		boolean find =false;

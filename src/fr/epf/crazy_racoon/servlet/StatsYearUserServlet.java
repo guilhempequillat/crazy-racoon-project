@@ -30,16 +30,23 @@ public class StatsYearUserServlet extends HttpServlet {
 			throws ServletException, IOException {
 		if(request.getSession().getAttribute("user")!=null){
 			User currentUser = (User) request.getSession().getAttribute("user");
+			
 			if (!currentUser.getStatut()) {
-				double[] aveRates = motmDao.rateMonth();
+				
+				//intialisation des notes de toute la boite
+				double[] aveRates = motmDao.ratePerMonth();
 				for (int i = 0; i < aveRates.length; i++) {
 					request.getSession().setAttribute("RateMonth" + (i + 1), aveRates[i]);
 				}
+				
+				//intialisation des notes du user uniquement
 				User user = (User) request.getSession().getAttribute("user");
-				double[] rates = motmDao.ownRateMonth(user.getId());
+				double[] rates = motmDao.ownRatePerMonth(user.getId());
 				for (int i = 0; i < rates.length; i++) {
 					request.getSession().setAttribute("Rate2Month" + (i + 1), rates[i]);
 				}
+				
+				//initialisation des labels
 				initializeLabels(request);
 				request.getRequestDispatcher("WEB-INF/stats-year-user.jsp").forward(request, response);
 			} else {
@@ -58,6 +65,7 @@ public class StatsYearUserServlet extends HttpServlet {
 	private void initializeLabels (HttpServletRequest request){
 		Calendar calendar = Calendar.getInstance();
 		int month = calendar.get(Calendar.MONTH)+1;
+		
 		for(int i=0;i<12;i++){
 			String m = labelMonth[month];
 			request.getSession().setAttribute("LabelMonth"+(i+1), m);
