@@ -43,18 +43,20 @@ public class MotmDao {
 		em.remove(findOne(id));
 	}
 
-	public double[] rateMonth() {
-		double sum = 0;
-		double tot = 0;
-		Calendar calendar = Calendar.getInstance();
+	public double[] ratePerMonth() {
+		double sum ;
+		double total;
+		
 		List<Motm> result = em.createQuery("FROM Motm").getResultList();
-		double[] moy = new double[12];
+		double[] average = new double[12];
+		
+		Calendar calendar = Calendar.getInstance();
 		int month = calendar.get(Calendar.MONTH);
 		int year = calendar.get(Calendar.YEAR);
 
-		for (int i = 0; i < moy.length; i++) {
+		for (int i = 0; i < average.length; i++) {
 			sum = 0;
-			tot = 0;
+			total = 0;
 			calendar.set(year, month, 1, 0, 0);
 			int nbDay = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
 
@@ -67,12 +69,12 @@ public class MotmDao {
 				Motm motm = iterator.next();
 				Date thisDate = motm.getMotmDate();
 				if (thisDate.compareTo(dateFin) <= 0 && thisDate.compareTo(dateDebut) >= 0) {
-					tot++;
+					total++;
 					sum = sum + motm.getGrade();
 				}
 			}
-			if (tot != 0) {
-				moy[11 - i] = sum / tot;
+			if (total != 0) {
+				average[11 - i] = sum / total;
 			}
 			month--;
 			if (month < 1) {
@@ -80,13 +82,14 @@ public class MotmDao {
 				year--;
 			}
 		}
-		return moy;
+		return average;
 	}
 
-	public double[] ownRateMonth(Long userId) {
-		Calendar calendar = Calendar.getInstance();
+	public double[] ownRatePerMonth(Long userId) {
 		List<Motm> result = em.createQuery("FROM Motm").getResultList();
 		double[] rates = new double[12];
+		
+		Calendar calendar = Calendar.getInstance();
 		int month = calendar.get(Calendar.MONTH);
 		int year = calendar.get(Calendar.YEAR);
 
@@ -116,10 +119,11 @@ public class MotmDao {
 		return rates;
 	}
 
-	public int[] ownRateYear(Long userId) {
-		Calendar calendar = Calendar.getInstance();
+	public int[] ownRateDuringYear(Long userId) {
 		List<Motm> result = em.createQuery("FROM Motm").getResultList();
 		int[] rates = new int[6];
+		
+		Calendar calendar = Calendar.getInstance();
 		int month = calendar.get(Calendar.MONTH);
 		int year = calendar.get(Calendar.YEAR) - 1;
 		calendar.set(year, month, 1, 0, 0);
@@ -143,10 +147,11 @@ public class MotmDao {
 		return rates;
 	}
 
-	public int[] rateMonth(int month, int year) {
-		Calendar calendar = Calendar.getInstance();
+	public int[] rateDuringMonth(int month, int year) {
 		List<Motm> result = em.createQuery("FROM Motm").getResultList();
 		int[] rates = new int[6];
+		
+		Calendar calendar = Calendar.getInstance();
 		calendar.set(year, month - 1, 1, 0, 0);
 		int nbDay = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
 
@@ -159,7 +164,6 @@ public class MotmDao {
 			Motm motm = iterator.next();
 			Date thisDate = motm.getMotmDate();
 			if (thisDate.compareTo(dateFin) <= 0 && thisDate.compareTo(dateDebut) >= 0) {
-				int i = motm.getGrade();
 				rates[motm.getGrade() - 1]++;
 				rates[5]++;
 			}
@@ -167,10 +171,11 @@ public class MotmDao {
 		return rates;
 	}
 
-	public List<Motm> ownComments(Long userId) {
-		Calendar calendar = Calendar.getInstance();
+	public List<Motm> ownCommentsDuringYear(Long userId) {
 		List<Motm> result = em.createQuery("FROM Motm").getResultList();
 		List<Motm> finalResult = new ArrayList<Motm>();
+		
+		Calendar calendar = Calendar.getInstance();
 		int month = calendar.get(Calendar.MONTH);
 		int year = calendar.get(Calendar.YEAR) - 1;
 		calendar.set(year, month, 1, 0, 0);
@@ -192,11 +197,11 @@ public class MotmDao {
 		return finalResult;
 	}
 
-	public List<Motm> commentsMonth(int month, int year) {
-		SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yyyy");
-		Calendar calendar = Calendar.getInstance();
+	public List<Motm> commentsDuringMonth(int month, int year) {
 		List<Motm> result = em.createQuery("FROM Motm").getResultList();
 		List<Motm> finalResult = new ArrayList<Motm>();
+		
+		Calendar calendar = Calendar.getInstance();
 		month-=1;
 		calendar.set(year, month, 1, 0, 0);
 		int nbDay = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
@@ -204,9 +209,6 @@ public class MotmDao {
 		Date dateDebut = calendar.getTime();
 		calendar.set(year, month, nbDay, 23, 59);
 		Date dateFin = calendar.getTime();
-
-		String d = sdf.format(dateDebut);
-		String f = sdf.format(dateFin);
 
 		Iterator<Motm> iterator = result.iterator();
 		while (iterator.hasNext()) {
@@ -248,7 +250,7 @@ public class MotmDao {
 		return dateResult;
 	}
 
-	public void initialisationRates(HttpServletRequest request, int[] rates, DecimalFormat df) {
+	public void initialisationPourcentRates(HttpServletRequest request, int[] rates, DecimalFormat df) {
 		for (int i = 0; i < rates.length - 1; i++) {
 			request.getSession().setAttribute("Rate" + (i + 1), rates[i]);
 			double number = rates[i];

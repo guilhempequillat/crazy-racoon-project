@@ -29,7 +29,9 @@ public class EditMemberServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if(request.getSession().getAttribute("user")!=null){
 			User currentUser = (User) request.getSession().getAttribute("user");
+			
 			if (currentUser.getStatut()) {
+				
 				String id = request.getParameter("editbutton");
 				Long i= (long) Integer.parseInt(id);
 				userEdit = userDao.findOne(i);

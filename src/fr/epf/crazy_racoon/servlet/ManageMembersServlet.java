@@ -30,6 +30,7 @@ public class ManageMembersServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if(request.getSession().getAttribute("user")!=null){
 			User currentUser = (User) request.getSession().getAttribute("user");
+			
 			if (currentUser.getStatut()) {
 				List <User>  listu = userDao.findAll();
 				request.getSession().setAttribute("users", listu);

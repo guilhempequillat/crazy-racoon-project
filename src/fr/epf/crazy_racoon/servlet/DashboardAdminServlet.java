@@ -30,42 +30,54 @@ public class DashboardAdminServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		if(request.getSession().getAttribute("user")!=null){
+		if (request.getSession().getAttribute("user") != null) {
 			User currentUser = (User) request.getSession().getAttribute("user");
+
 			if (currentUser.getStatut()) {
 				DecimalFormat df = new DecimalFormat("########.0");
 				int month;
 				int year;
-				if(request.getParameter("month")!=null&&request.getParameter("year")!=null){
-					month= Integer.parseInt(request.getParameter("month"));
-					year= Integer.parseInt(request.getParameter("year"));				
-				}else{
+				
+				//si l'année et le mois ont été pré-choisit
+				if (request.getParameter("month") != null && request.getParameter("year") != null) {
+					month = Integer.parseInt(request.getParameter("month"));
+					year = Integer.parseInt(request.getParameter("year"));
+				} else {
+					//sinon mois précédent choisit par défaut
 					Calendar calendar = Calendar.getInstance();
 					month = calendar.get(Calendar.MONTH);
 					year = calendar.get(Calendar.YEAR);
 				}
+				
+				//Chargement de la liste déroulante
 				List<DateReport> listMonth = motmDao.chargeAvailableDate();
 				request.getSession().setAttribute("months", listMonth);
-				
+
+				//initialisation de la date
 				request.getSession().setAttribute("Date", month + "/" + year);
 
-				int[] rates = motmDao.rateMonth(month, year);
-				motmDao.initialisationRates(request, rates, df);
+				//initialisation des notes du mois
+				int[] rates = motmDao.rateDuringMonth(month, year);
 
-				double average = motmDao.calculateAverage(request, rates, df);
-				motmDao.adaptPicture(request, average);
-				List<Motm> motms = motmDao.commentsMonth(month, year);
-				request.getSession().setAttribute("motms", motms);
+				if (rates[5] > 0) {//s'il y a des données
+					//Calcul des pourcentage, de la moyenne
+					motmDao.initialisationPourcentRates(request, rates, df);
+					double average = motmDao.calculateAverage(request, rates, df);
+					
+					//initialisation de l'image et des commentaires
+					motmDao.adaptPicture(request, average);
+					List<Motm> motms = motmDao.commentsDuringMonth(month, year);
+					
+					request.getSession().setAttribute("motms", motms);
+				}
 				request.getRequestDispatcher("WEB-INF/dashboard_admin.jsp").forward(request, response);
 			} else {
 				request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 			}
-		}else{
+		} else {
 			request.getRequestDispatcher("WEB-INF/not_connected.jsp").forward(request, response);
 		}
-		
-	}
 
-	
+	}
 
 }
