@@ -20,19 +20,20 @@ import fr.epf.crazy_racoon.model.User;
 
 @WebServlet("/register")
 public class RegistrationServlet extends HttpServlet {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	@Inject
 	private UserDao userDao;
-	
+
 	public RegistrationServlet() {
 	}
-	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		request.getRequestDispatcher("WEB-INF/register.jsp").forward(request, response);
 	}
-	
+
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		User u;
@@ -42,11 +43,10 @@ public class RegistrationServlet extends HttpServlet {
 			userDao.save(u);
 			resp.sendRedirect("motm-form");
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	
+
 	private User parseUser(HttpServletRequest req) throws ParseException {
 		String firstName = req.getParameter("firstName");
 		String lastName = req.getParameter("lastName");
@@ -64,7 +64,12 @@ public class RegistrationServlet extends HttpServlet {
 			}
 		}
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+<<<<<<< HEAD
 		Date d = sdf.parse(dateToParse);
 		return new User(firstName, lastName, password, d,email);
+=======
+		Date d = sdf.parse(req.getParameter("birthdate"));
+		return new User(firstName, lastName, password, d, email);
+>>>>>>> dd4d17a661fbda96d8e33fb653969b18e786c3f5
 	}
 }

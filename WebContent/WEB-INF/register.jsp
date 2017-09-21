@@ -18,15 +18,11 @@
 <title>Registration</title>
 </head>
 <body>
-
-
-
 	<c:if test="${connect == false}">
 		<div class="alert alert-danger">
 			<strong>Error!</strong> Password or Email invalid ${connect}
 		</div>
 	</c:if>
-
 	<br>
 	<br>
 	<br>
@@ -59,7 +55,6 @@
 										<input type="password" name="password" id="password"
 											tabindex="2" class="form-control" placeholder="Password">
 									</div>
-
 									<div class="form-group">
 										<div class="row">
 											<div class="col-sm-6 col-sm-offset-3">
@@ -102,8 +97,6 @@
 										<input type="text" name="birthdate" placeholder="Birthdate"
 											id="birthdate" class="form-control">
 									</div>
-			
-
 									<div class="form-group">
 										<div class="row">
 											<div class="col-sm-6 col-sm-offset-3">
@@ -121,13 +114,6 @@
 			</div>
 		</div>
 	</div>
-
-
-
-
-
-
-
 	<script type="text/javascript">
 		$(function() {
 			$('#login-form-link').click(function(e) {
@@ -150,7 +136,6 @@
             });
         });
 	</script>
-
 </body>
 <%@include file="footer.jsp"%>
 </html>
