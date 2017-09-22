@@ -67,8 +67,9 @@
 									<form id="setting-mail-form" action="mail" method="POST"
 										role="form">
 										<div class="form-group">
-											<label for="name">Subject</label> <input type="text"
-												class="input-lg form-control" id="name"
+											<label for="name">Subject</label>
+											<input type="text"
+												class="input-lg form-control" id="name" name="name"
 												value="Hey , let's hear it for your mood of the month!">
 										</div>
 										<div class="form-group">
@@ -76,8 +77,9 @@
 												href="mail-template" target="_blank">check the email
 													template</a>)
 											</label>
-											
-											<textarea id="email-template" class="content" cols="" rows=""></textarea>
+
+											<textarea id="email-template" name="email-template" class="content"
+												cols="" rows=""></textarea>
 										</div>
 										<div class="form-group">
 											<div class="row">

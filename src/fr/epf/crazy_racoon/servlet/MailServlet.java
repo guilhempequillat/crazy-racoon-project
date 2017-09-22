@@ -38,7 +38,8 @@ private Session mailSession;
        
 	@Inject
 	private UserDao userDao;
-	private MailDao MailDao;
+	@Inject
+	private MailDao mailDao;
 	
 	private List <User>  listu;
 	
@@ -66,9 +67,9 @@ private Session mailSession;
 		try {
 			m=parseMail(req);
 			req.getSession().setAttribute("users", listu);
-			MailDao.save(m);
+			mailDao.save(m);
 			Mail.sendmail(Mail.listusersemail(listu),m.getSubject(),m.getContent());
-			//Mail.sendmail(Mail.listusersemail(listu),"super",content);
+			doGet(req, response);
 		} catch(ParseException e)
 		{
 			e.printStackTrace();
@@ -90,8 +91,16 @@ private Session mailSession;
          */
 	private Mail parseMail(HttpServletRequest req) throws ParseException {
 		String subject = req.getParameter("name");
-		String content = req.getParameter("email-template");
+		String content = emailBody( req.getParameter("email-template") );
 		return new Mail(subject, content);
+	}
+	
+	private String emailBody(String input) {
+		String body ="<h1>Hi !</h1>"+
+			"<h3>Don't forget to complete your motm form !</h3>"+
+			"<p>"+input+"</p>"+
+			"<br>Regards, your administrator<br><a href=\"http://localhost:8080/crazy-racoon/register\">Go to crazy racoon!</a>";
+		return body;
 	}
 	
 }

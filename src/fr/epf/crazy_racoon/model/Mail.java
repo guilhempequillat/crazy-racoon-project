@@ -15,11 +15,12 @@ import javax.mail.Transport;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-
+@Entity
 public class Mail {
 	
 
@@ -48,6 +49,7 @@ public class Mail {
 	props.put("mail.smtp.starttls.enable", "true");
 	props.put("mail.smtp.host", "smtp.gmail.com");
 	props.put("mail.smtp.port", "587");
+	props.put("mail.smtp.ssl.trust", "smtp.gmail.com");
 
 	Session session = Session.getInstance(props,
 	  new javax.mail.Authenticator() {
@@ -60,8 +62,7 @@ public class Mail {
 	MimeMessage message = new MimeMessage(session);
 	
 	message.setFrom(new InternetAddress(username));
-	message.setRecipients(Message.RecipientType.TO,
-		toUsers);
+	message.setRecipients(Message.RecipientType.TO,toUsers);
 	message.setSubject(subject);
 	message.setContent(content, "text/html; charset=utf-8");
 
