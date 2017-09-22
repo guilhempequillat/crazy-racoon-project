@@ -36,7 +36,11 @@ public class MotmDao {
 	}
 	
 	public void removeSome(Long id) {
-		em.remove(em.createQuery("FROM Motm WHERE user_id=" + id).getResultList());
+		List<Motm> listToRemove = fillAllByIdUser(id);
+		Iterator<Motm> iterator = listToRemove.iterator();
+		while(iterator.hasNext()){
+			em.remove(iterator.next());
+		}
 	}
 
 	public List<Motm> fillAllByIdUser(Long id_user) {

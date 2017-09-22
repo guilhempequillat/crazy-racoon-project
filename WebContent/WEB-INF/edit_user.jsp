@@ -11,7 +11,7 @@
 	<script src="bootstrap/js/jquery-3.1.1.min.js" type="text/javascript"></script>
 	<script src="bootstrap/js/bootstrap.js" type="text/javascript"></script>
 </head>
-<%@include file="header-admin.jsp"%>
+<%@include file="header-user.jsp"%>
 <body>
 <div class="row">
 				<div class="col-lg-12">

@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import fr.epf.crazy_racoon.dao.MotmDao;
+import fr.epf.crazy_racoon.dao.TemplateDao;
 import fr.epf.crazy_racoon.dao.UserDao;
 import fr.epf.crazy_racoon.model.DateReport;
 import fr.epf.crazy_racoon.model.Motm;
@@ -27,6 +28,10 @@ public class DashboardAdminServlet extends HttpServlet {
 
 	@Inject
 	private MotmDao motmDao;
+	@Inject
+	private UserDao userDao;
+	@Inject
+	private TemplateDao templateDao;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -37,38 +42,28 @@ public class DashboardAdminServlet extends HttpServlet {
 				DecimalFormat df = new DecimalFormat("########.0");
 				int month;
 				int year;
-				
-				//si l'année et le mois ont été pré-choisit
-				if (request.getParameter("month") != null && request.getParameter("year") != null) {
-					month = Integer.parseInt(request.getParameter("month"));
-					year = Integer.parseInt(request.getParameter("year"));
-				} else {
-					//sinon mois précédent choisit par défaut
-					Calendar calendar = Calendar.getInstance();
-					month = calendar.get(Calendar.MONTH);
-					year = calendar.get(Calendar.YEAR);
-				}
-				
-				//Chargement de la liste déroulante
-				List<DateReport> listMonth = motmDao.chargeAvailableDate();
-				request.getSession().setAttribute("months", listMonth);
 
+				// Initialisation date
+				Calendar calendar = Calendar.getInstance();
+				month = calendar.get(Calendar.MONTH)+1;
+				year = calendar.get(Calendar.YEAR);
+
+				// initialisation des notes du mois
+				int[] rates = motmDao.rateDuringMonth(month, year);
+				
 				//initialisation de la date
 				request.getSession().setAttribute("Date", month + "/" + year);
+				
+				//initialisation nombre membres et nombre templates
+				int totalMember = userDao.findAll().size();
+				request.getSession().setAttribute("NumberMember", totalMember);
+				int totalTemplate = templateDao.findAll().size();
+				request.getSession().setAttribute("NumberTemplate", totalTemplate);
 
-				//initialisation des notes du mois
-				int[] rates = motmDao.rateDuringMonth(month, year);
-
-				if (rates[5] > 0) {//s'il y a des données
-					//Calcul des pourcentage, de la moyenne
+				if (rates[5] > 0) {// s'il y a des données
+					// Calcul des pourcentage, de la moyenne
 					motmDao.initialisationPourcentRates(request, rates, df);
 					double average = motmDao.calculateAverage(request, rates, df);
-					
-					//initialisation de l'image et des commentaires
-					motmDao.adaptPicture(request, average);
-					List<Motm> motms = motmDao.commentsDuringMonth(month, year);
-					
-					request.getSession().setAttribute("motms", motms);
 				}
 				request.getRequestDispatcher("WEB-INF/dashboard_admin.jsp").forward(request, response);
 			} else {

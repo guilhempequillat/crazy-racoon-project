@@ -28,16 +28,16 @@
 							<div class="col-lg-12">
 								<form id="register-form" action="edit-member" method="POST" role="form">
 									<div class="form-group">
-										<input type="text" value="${user.firstName}" name="firstName" placeholder="First Name" id="firstname"  class="form-control" >
+										<input type="text" value="${userEdit.firstName}" name="firstName" placeholder="First Name" id="firstname"  class="form-control" >
 									</div>
 									<div class="form-group">
-										<input type="text" value="${user.lastName}" name="lastName" placeholder="Last Name" id="lastName"  class="form-control" >
+										<input type="text" value="${userEdit.lastName}" name="lastName" placeholder="Last Name" id="lastName"  class="form-control" >
 									</div>
 									<div class="form-group">
-										<input type="email" value="${user.email}" name="email" id="email" class="form-control" placeholder="Email Address" >
+										<input type="email" value="${userEdit.email}" name="email" id="email" class="form-control" placeholder="Email Address" >
 									</div>
 									<div class="form-group">
-										<input type="date" value="${user.stringDate}" name="birthdate" placeholder="Birthdate" id="birthdate"  class="form-control" >
+										<input type="date" value="${userEdit.stringDate}" name="birthdate" placeholder="Birthdate" id="birthdate"  class="form-control" >
 									</div>
 									<div class="form-group">
 										<div class="row">

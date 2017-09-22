@@ -50,8 +50,8 @@ public class ManageMembersServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		Long id = (long) Integer.parseInt(request.getParameter("removebutton"));
-		userDao.removeOne(id);
 		motmDao.removeSome(id);
+		userDao.removeOne(id);
 		response.sendRedirect("manage-members");
 	}
 }

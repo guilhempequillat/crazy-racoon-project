@@ -51,11 +51,11 @@
 
 									<td><form action="edit-member" method="GET">
 											<input type="text" value="${user.id}" name="editbutton" style="display:none;">
-											<input type="submit" class="class="icon-edit"">
+											<input type="submit" class="update btn btn-warning" value="Edit" style="width:67px;">
 										</form></td>
 									<td><form action="manage-members" method="POST">
 											<input type="text" value="${user.id}" name="removebutton" style="display:none;">
-											<input type="submit" class="glyphicon glyphicon-pencil">
+											<input type="submit" class="update btn btn-danger" value="Delete" style="width:67px;">
 										</form></td>
 								</tr>
 							</c:forEach>
@@ -77,9 +77,6 @@
 
 	<div class="container">
 		<a href="add-member" class="btn btn-info btn-lg">Add a member</a>
-	</div>
-	<div class="container">
-		<a href="dashboard-admin" class="btn btn-info btn-lg">Previous</a>
 	</div>
 </body>
 <%@include file="footer.jsp"%> 
