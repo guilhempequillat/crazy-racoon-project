@@ -51,7 +51,7 @@
 											<ul class="dropdown-menu dropdown-user">
 												<c:forEach items="${months}" var="month">
 													<li><a
-														href="dashboard-admin?month=${month.monthNumber}&year=${month.yearNumber}">${month.dateString}</a></li>
+														href="report-admin?month=${month.monthNumber}&year=${month.yearNumber}">${month.dateString}</a></li>
 												</c:forEach>
 											</ul>
 										</div>

@@ -305,10 +305,10 @@ public class MotmDao {
 	public String toStringCsv() {
 		List<Motm> list = findAll();
 		String result = "";
-		result = "Grade,Comment,Date\n";
+		result = "Grade$Comment$Date\n";
 		for(int i = 0 ; i<list.size() ; i++) {
-			result += list.get(i).getGrade()+","
-				+list.get(i).getComment()+","
+			result += list.get(i).getGrade()+"$"
+				+list.get(i).getComment()+"$"
 				+list.get(i).getDateToString()+"\n";
 		}
 		return result;
