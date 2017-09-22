@@ -1,36 +1,35 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+	pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
 
+<title>Mood of the month</title>
+
+<!-- Bootstrap CSS -->
 
 <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
 <link href="style.css" rel="stylesheet">
-
-<script src="bootstrap/js/jquery-3.1.1.min.js" type="text/javascript"></script>
-<script src="bootstrap/js/bootstrap.js" type="text/javascript"></script>
-
 <!-- Custom Fonts -->
 <link
 	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
 	rel="stylesheet" type="text/css">
-
-
-<title>Insert title here</title>
 </head>
 <%@include file="header-admin.jsp"%>
 <body>
-
-
 	<div id="wrapper">
 
 
 		<div id="page-wrapper" class="container-fluid">
 			<div class="row">
 				<div class="col-lg-12">
-					<h1 class="page-header">Report</h1>
+					<h1 class="page-header">Statistics</h1>
 				</div>
 				<!-- /.col-lg-12 -->
 			</div>
@@ -50,10 +49,10 @@
 												class="fa fa-caret-down"></i>
 											</a>
 											<ul class="dropdown-menu dropdown-user">
-												<li><a href="#">March 2017</a></li>
-												<li><a href="#">February 2017</a></li>
-												<li><a href="#">January 2017</a></li>
-												<li><a href="#">December 2016</a></li>
+												<c:forEach items="${months}" var="month">
+													<li><a
+														href="dashboard-admin?month=${month.monthNumber}&year=${month.yearNumber}">${month.dateString}</a></li>
+												</c:forEach>
 											</ul>
 										</div>
 										<div class="clearfix"></div>
@@ -63,9 +62,9 @@
 										<div class="half">
 											<div class="month">
 												<p class="month">
-													<strong>MARCH 2017</strong>
+													<strong>MOOD OF THE MONTH</strong>
 												</p>
-												<p class="sub_title">MOOD OF THE MONTH</p>
+												<p class="sub_title">${Date}</p>
 											</div>
 
 											<div class="details">
@@ -79,13 +78,13 @@
 														</div>
 														<div class="col-xs-9">
 															<div class="progress-bar-container">
-																<span class="desc">Vote count: 10</span>
+																<span class="desc">Vote count: ${Rate1}</span>
 																<div class="progress">
 																	<div class="progress-bar progress-bar-danger"
-																		role="progressbar" aria-valuenow="10"
+																		role="progressbar" aria-valuenow="${Rate1}"
 																		aria-valuemin="0" aria-valuemax="100"
-																		style="width: 10%">
-																		<span class="">10%</span>
+																		style="width: ${Pourcent1}%">
+																		<span class="">${Pourcent1}%</span>
 																	</div>
 																</div>
 															</div>
@@ -101,12 +100,13 @@
 														</div>
 														<div class="col-xs-9">
 															<div class="progress-bar-container">
-																<span class="desc">Vote count: 5</span>
+																<span class="desc">Vote count: ${Rate2}</span>
 																<div class="progress">
 																	<div class="progress-bar progress-bar-warning"
-																		role="progressbar" aria-valuenow="5" aria-valuemin="0"
-																		aria-valuemax="100" style="width: 5%">
-																		<span class="">5%</span>
+																		role="progressbar" aria-valuenow="${Rate2}"
+																		aria-valuemin="0" aria-valuemax="100"
+																		style="width: ${Pourcent2}%">
+																		<span class="">${Pourcent2}%</span>
 																	</div>
 																</div>
 															</div>
@@ -122,13 +122,13 @@
 														</div>
 														<div class="col-xs-9">
 															<div class="progress-bar-container">
-																<span class="desc">Vote count: 15</span>
+																<span class="desc">Vote count: ${Rate3}</span>
 																<div class="progress">
 																	<div class="progress-bar progress-bar-midsuccess"
-																		role="progressbar" aria-valuenow="15"
+																		role="progressbar" aria-valuenow="${Rate3}"
 																		aria-valuemin="0" aria-valuemax="100"
-																		style="width: 15%">
-																		<span class="">15%</span>
+																		style="width: ${Pourcent3}%">
+																		<span class="">${Pourcent3}%</span>
 																	</div>
 																</div>
 															</div>
@@ -144,13 +144,13 @@
 														</div>
 														<div class="col-xs-9">
 															<div class="progress-bar-container">
-																<span class="desc">Vote count: 45</span>
+																<span class="desc">Vote count: ${Rate4}</span>
 																<div class="progress">
 																	<div class="progress-bar progress-bar-neutral"
-																		role="progressbar" aria-valuenow="45"
+																		role="progressbar" aria-valuenow="${Rate4}"
 																		aria-valuemin="0" aria-valuemax="100"
-																		style="width: 45%">
-																		<span class="">45%</span>
+																		style="width: ${Pourcent4}%">
+																		<span class="">${Pourcent4}%</span>
 																	</div>
 																</div>
 															</div>
@@ -166,13 +166,13 @@
 														</div>
 														<div class="col-xs-9">
 															<div class="progress-bar-container">
-																<span class="desc">Vote count: 25</span>
+																<span class="desc">Vote count: ${Rate5}</span>
 																<div class="progress">
 																	<div class="progress-bar progress-bar-success"
-																		role="progressbar" aria-valuenow="25"
+																		role="progressbar" aria-valuenow="${Rate5}"
 																		aria-valuemin="0" aria-valuemax="100"
-																		style="width: 25%">
-																		<span class="">25%</span>
+																		style="width: ${Pourcent5}%">
+																		<span class="">${Pourcent5}%</span>
 																	</div>
 																</div>
 															</div>
@@ -184,60 +184,29 @@
 										<div class="half-2">
 											<div class="row">
 												<div class="col-xs-3 col-xs-offset-3">
-													<img src="img/racoon1.jpg" alt="" class="img-responsive" />
+													<img src="${Picture}" alt="" class="img-responsive" />
 												</div>
 												<div class="col-xs-6">
 
 													<div class="title_mood">Global Mood</div>
 													<div class="note">
-														<strong>4.2/5 </strong>
+														<strong>${Average}/5 </strong>
 													</div>
 												</div>
 											</div>
 
 											<div class="row">
 												<div class="comments">
-													<h2 class="title">Comments</h2>
-													<div class="comment-container">
-														<div class="note">
-															<img class="mood" src="img/racoon3.jpg" alt="" />
+
+													<c:forEach items="${motms}" var="motm">
+														<div class="comment-container">
+															<div class="note">
+																<img class="mood" src="img/racoon${motm.grade}.jpg"
+																	alt="" />
+															</div>
+															<div class="comment">${motm.comment}</div>
 														</div>
-														<div class="comment">Lorem ipsum dolor sit amet,
-															consectetur adipiscing elit. Duis nec nulla quam. Integer
-															nisi ligula, molestie id diam ac, sagittis efficitur
-															justo. Etiam aliquam aliquam dolor sed fringilla. Nullam
-															at.</div>
-													</div>
-													<div class="comment-container">
-														<div class="note">
-															<img class="mood" src="../img/4.png" alt="" />
-														</div>
-														<div class="comment">Lorem ipsum dolor sit amet,
-															consectetur adipiscing elit. Duis nec nulla quam. Integer
-															nisi ligula, molestie id diam ac, sagittis efficitur
-															justo. Etiam aliquam aliquam dolor sed fringilla. Nullam
-															at.</div>
-													</div>
-													<div class="comment-container">
-														<div class="note">
-															<img class="mood" src="../img/3.png" alt="" />
-														</div>
-														<div class="comment">Lorem ipsum dolor sit amet,
-															consectetur adipiscing elit. Duis nec nulla quam. Integer
-															nisi ligula, molestie id diam ac, sagittis efficitur
-															justo. Etiam aliquam aliquam dolor sed fringilla. Nullam
-															at.</div>
-													</div>
-													<div class="comment-container">
-														<div class="note">
-															<img class="mood" src="../img/5.png" alt="" />
-														</div>
-														<div class="comment">Lorem ipsum dolor sit amet,
-															consectetur adipiscing elit. Duis nec nulla quam. Integer
-															nisi ligula, molestie id diam ac, sagittis efficitur
-															justo. Etiam aliquam aliquam dolor sed fringilla. Nullam
-															at.</div>
-													</div>
+													</c:forEach>
 												</div>
 											</div>
 										</div>
@@ -247,6 +216,11 @@
 							<!-- /.row -->
 						</div>
 						<!-- /.panel-body -->
+						<div class="container">
+							<a href="import-file" class="btn btn-info btn-lg">Export CSV
+								File</a>
+						</div>
+						<br>
 					</div>
 					<!-- /.panel -->
 				</div>
@@ -257,7 +231,16 @@
 		<!-- /#page-wrapper -->
 
 	</div>
+	</footer>
 
+	<!-- jQuery -->
+	<script src="../js/jquery-3.1.1.min.js"></script>
+
+	<!-- togggle.js -->
+	<script src="../js/toggle.js"></script>
+
+	<!-- Bootstrap Core JavaScript -->
+	<script src="../js/bootstrap.min.js"></script>
 </body>
 <%@include file="footer.jsp"%>
 </html>

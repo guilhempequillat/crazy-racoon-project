@@ -20,7 +20,7 @@
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="register"> MOTM | Crazy Racoon </a>
+			<a class="navbar-brand" href="dashboard-admin"> MOTM | Crazy Racoon </a>
 		</div>
 
 		<!-- Collect the nav links, forms, and other content for toggling -->
@@ -29,10 +29,11 @@
 
 
 			<ul class="nav navbar-nav navbar-left">
-				<li class="active"><a href="edit-template"> <span
-						class="fa fa-pencil"></span> MOTM template
+				<li><a href="edit-template"> <span class="fa fa-pencil"></span>
+						MOTM template
 				</a></li>
-				<li><a href="import-file"> <span class="fa fa-calendar"></span>
+				<li><a href="report-admin"> <span class="fa fa-calendar"></span>
+
 						Report
 				</a></li>
 				<li><a href="stats-year-admin"> <span
@@ -46,8 +47,8 @@
 
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href=""><span class="glyphicon glyphicon-cog"></span>
-						Settings</a></li>
+				<li><a href="edit-user"><span
+						class="glyphicon glyphicon-cog"></span> Settings</a></li>
 				<li><a href="deconnection"><span class="fa fa-sign-out"></span>
 						Logout</a></li>
 			</ul>

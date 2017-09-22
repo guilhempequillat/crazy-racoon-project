@@ -13,76 +13,82 @@
 </head>
 <%@include file="header-user.jsp"%>
 <body>
-<div class="row">
-				<div class="col-lg-12">
-					<h1 class="page-header">MOTM Form</h1>
-				</div>
-			
-			</div>
+	<c:if test="${gradeExist == false}">
+		<div class="alert alert-danger">
+			<strong>Error!</strong> Please select a grade !
+		</div>
+	</c:if>
+	<div class="row">
+		<div class="col-lg-12">
+			<h1 class="page-header">MOTM Form</h1>
+		</div>
+
+	</div>
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-6 col-xs-offset-3">
-				<c:if test="${not empty user }">
 				<c:if test="${not empty template }">
 					<h2 align="center">
 						<strong>Hi ${ user.firstName } ! </strong> <br> ${ template.title }
 					</h2>
-					<p> ${ template.text } </p>
+					<p>${ template.text }</p>
 				</c:if>
 				<c:if test="${empty template }">
 					<h2 align="center">
 						<strong>Hi ${ user.firstName } ! </strong> <br>
 					</h2>
 				</c:if>
-					<form action="motm-form" method="POST" role="form">
-						<div class="form-group">
-							<label>Grade : </label>
-							<div class="row">
-								<div class="col-xs-2 col-xs-offset-1">
-									<input type="radio" class="radio_item" name="grade" value="1"
-										id="radio1"> <label class="label_item" for="radio1">
-										<img src="img/racoon1.jpg" class="img-responsive" alt="">
-									</label>
-								</div>
-								<div class="col-xs-2">
-									<input type="radio" class="radio_item" name="grade" value="2"
-										id="radio2"> <label class="label_item" for="radio2">
-										<img src="img/racoon2.jpg" class="img-responsive" alt="">
-									</label>
-								</div>
-								<div class="col-xs-2">
-									<input type="radio" class="radio_item" name="grade" value="3"
-										id="radio3"> <label class="label_item" for="radio3">
-										<img src="img/racoon3.jpg" class="img-responsive" alt="">
-									</label>
-								</div>
-								<div class="col-xs-2">
-									<input type="radio" class="radio_item" name="grade" value="4"
-										id="radio4"> <label class="label_item" for="radio4">
-										<img src="img/racoon4.jpg" class="img-responsive" alt="">
-									</label>
-								</div>
-								<div class="col-xs-2">
-									<input type="radio" class="radio_item" name="grade" value="5"
-										id="radio5"> <label class="label_item" for="radio5">
-										<img src="img/racoon5.jpg" class="img-responsive" alt="">
-									</label>
-								</div>
-
+				<form action="motm-form" method="POST" role="form">
+					<div class="form-group">
+						<label>Grade : </label>
+						<div class="row">
+							<div class="col-xs-2 col-xs-offset-1">
+								<input type="radio" class="radio_item" name="grade" value="1"
+									id="radio1"> <label class="label_item" for="radio1">
+									<img src="img/racoon1.jpg" class="img-responsive" alt="">
+								</label>
 							</div>
+							<div class="col-xs-2">
+								<input type="radio" class="radio_item" name="grade" value="2"
+									id="radio2"> <label class="label_item" for="radio2">
+									<img src="img/racoon2.jpg" class="img-responsive" alt="">
+								</label>
+							</div>
+							<div class="col-xs-2">
+								<input type="radio" class="radio_item" name="grade" value="3"
+									id="radio3"> <label class="label_item" for="radio3">
+									<img src="img/racoon3.jpg" class="img-responsive" alt="">
+								</label>
+							</div>
+							<div class="col-xs-2">
+								<input type="radio" class="radio_item" name="grade" value="4"
+									id="radio4"> <label class="label_item" for="radio4">
+									<img src="img/racoon4.jpg" class="img-responsive" alt="">
+								</label>
+							</div>
+							<div class="col-xs-2">
+								<input type="radio" class="radio_item" name="grade" value="5"
+									id="radio5"> <label class="label_item" for="radio5">
+									<img src="img/racoon5.jpg" class="img-responsive" alt="">
+								</label>
+							</div>
+
 						</div>
-						<div class="form-group">
-							<label>Comment : </label>
-							<textarea name="comment" placeholder="Comment"
-								class="form-control" cols="" rows=""></textarea>
-						</div>
+					</div>
+					<div class="form-group">
+						<label>Comment : </label>
+						<textarea name="comment" placeholder="Comment"
+							class="form-control" cols="" rows=""></textarea>
+					</div>
+					<c:if test="${commentDefine == false}">
 						<input type="submit" value="Send" id="btn"
-							class="form-control btn btn-primary btn-block">
-					</form>
-				</c:if>
-				<c:if test="${empty user }">
-					<h1>You are not connected !!!</h1>
-				</c:if>
+						class="form-control btn btn-primary btn-block">
+					</c:if>
+					<c:if test="${commentDefine == true}">
+						<input type="submit" value="Edit" id="btn"
+						class="form-control btn btn-primary btn-block">
+					</c:if>
+				</form>
 				<div>
 					<c:if test="${not empty motm }">
 						<div class="row">
@@ -97,62 +103,63 @@
 							<div class="col-xs-9">
 								<div class="panel panel-default">
 									<div class="panel-heading">
-										<strong>${ user.firstName  }</strong>
-										 <span class="text-muted">
-										 commented
-										<c:choose>
-										  <c:when test="${year > 0 }">
-											  <c:if test="${year > 1 }">
-											 		${ year } years ago</span>
-											 	</c:if>
-											 	<c:if test="${year == 1 }">
-											 		${ year } year ago</span>
-											 	</c:if>
-										  </c:when>
-										  <c:otherwise> 
-										  	<c:choose>
-										  		<c:when test="${month > 0 }">
-											  		<c:if test="${month > 1 }">
-												 		${ month } months ago</span>
-												 	</c:if>
-												 	<c:if test="${month == 1 }">
-												 		${ month } month ago</span>
-												 	</c:if>
-										  		</c:when>
-										  		<c:otherwise> 
-										  			<c:choose>
-											  			<c:when test="${day >= 0 }">
-												  			<c:if test="${day > 1 }">
-														 		${ day } days ago</span>
-														 	</c:if>
-														 	<c:if test="${day == 1 }">
-														 		yesterday</span>
-														 	</c:if>
-														 	<c:if test="${ day == 0 }">
-														 		today</span>
-														 	</c:if>
-											  			</c:when>
-											  			<c:otherwise> 
-														 		</span>
-														 </c:otherwise>
-											  		</c:choose>
-										  		</c:otherwise>
-										  	</c:choose>
-										  </c:otherwise>
-										</c:choose>
-									</div>
-									<div class="panel-body">
-										<p>${ motm.comment }</p>
-									</div>
-									<!-- /panel-body -->
-								</div>
-								<!-- /panel panel-default -->
-							</div>
-						</div>
+										<strong>${ user.firstName  }</strong> <span class="text-muted">
+											commented <c:choose>
+												<c:when test="${year > 0 }">
+													<c:if test="${year > 1 }">
+											 		${ year } years ago
+										
+										
+										</span>
 					</c:if>
+					<c:if test="${year == 1 }">
+											 		${ year } year ago</span>
+					</c:if>
+					</c:when>
+					<c:otherwise>
+						<c:choose>
+							<c:when test="${month > 0 }">
+								<c:if test="${month > 1 }">
+												 		${ month } months ago</span>
+								</c:if>
+								<c:if test="${month == 1 }">
+												 		${ month } month ago</span>
+								</c:if>
+							</c:when>
+							<c:otherwise>
+								<c:choose>
+									<c:when test="${day >= 0 }">
+										<c:if test="${day > 1 }">
+														 		${ day } days ago</span>
+										</c:if>
+										<c:if test="${day == 1 }">
+														 		yesterday</span>
+										</c:if>
+										<c:if test="${ day == 0 }">
+														 		today</span>
+										</c:if>
+									</c:when>
+									<c:otherwise>
+										</span>
+									</c:otherwise>
+								</c:choose>
+							</c:otherwise>
+						</c:choose>
+					</c:otherwise>
+					</c:choose>
 				</div>
+				<div class="panel-body">
+					<p>${ motm.comment }</p>
+				</div>
+				<!-- /panel-body -->
 			</div>
+			<!-- /panel panel-default -->
 		</div>
+	</div>
+	</c:if>
+	</div>
+	</div>
+	</div>
 	</div>
 	<script type="text/javascript">
 		$('#btn').click(function() {
