@@ -31,7 +31,6 @@ import fr.epf.crazy_racoon.model.User;
 @WebServlet("/mail")
 public class MailServlet extends HttpServlet {
 
-//private Mail mail= new Mail();
 private Session mailSession;
 	 
 	private static final long serialVersionUID = 1L;
@@ -43,7 +42,6 @@ private Session mailSession;
 	
 	private List <User>  listu;
 	
-	//private String content = "<body><div>toto</div></body>";
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		listu = userDao.findAll();
 		request.getSession().setAttribute("users", listu);
@@ -69,7 +67,7 @@ private Session mailSession;
 			req.getSession().setAttribute("users", listu);
 			mailDao.save(m);
 			Mail.sendmail(Mail.listusersemail(listu),m.getSubject(),m.getContent());
-			doGet(req, response);
+			response.sendRedirect("mail");
 		} catch(ParseException e)
 		{
 			e.printStackTrace();
@@ -80,15 +78,6 @@ private Session mailSession;
         
 	}
 	
-	/*
-	    //mail  = mailDao.findOne(CONSTANTE)
-        /*
-         try {
-			Mail.sendmail(Mail.listusersemail(listu),mail.getSubject(),mail.getContent());
-		} catch (MessagingException e) {
-			e.printStackTrace();
-		} 
-         */
 	private Mail parseMail(HttpServletRequest req) throws ParseException {
 		String subject = req.getParameter("name");
 		String content = emailBody( req.getParameter("email-template") );

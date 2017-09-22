@@ -52,6 +52,8 @@ User (employee) :
 
 This website can't send automatic e-mail every Friday of the week to each employee. The admin have to manually send the e-mail.
 
+When an email is sent we have an erreur ("ERROR [io.undertow.request] (default task-19) UT005023: Exception handling request to /crazy-racoon/WEB-INF/mail.jsp: java.lang.IllegalStateException: UT010019: Response already commited"), we don't know where she comes from ...
+
 
 ## Related project
 

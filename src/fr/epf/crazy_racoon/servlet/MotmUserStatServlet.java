@@ -34,7 +34,7 @@ public class MotmUserStatServlet extends HttpServlet {
 			if (!currentUser.getStatut()) {
 				DecimalFormat df = new DecimalFormat("########.0");
 
-				// initialisation de la date a afficher
+				// initialisation of the date
 				Calendar calendar = Calendar.getInstance();
 				int month = calendar.get(Calendar.MONTH) + 1;
 				int year = calendar.get(Calendar.YEAR);
@@ -42,15 +42,14 @@ public class MotmUserStatServlet extends HttpServlet {
 
 				User user = (User) request.getSession().getAttribute("user");
 
-				// initialisation des pourcentages
+				// initialisation of percentages
 				long id = user.getId();
 				int[] rates = motmDao.ownRateDuringYear(id);
 
-				if (rates[5] > 0) {// s'il y a des données
+				if (rates[5] > 0) {//if there is data
 					motmDao.initialisationPourcentRates(request, rates, df);
 
-					// initialisation de la moyenne de l'image associée et des
-					// commentaires
+					// initialisation of the average, the picture and comments
 					double average = motmDao.calculateAverage(request, rates, df);
 					motmDao.adaptPicture(request, average);
 					List<Motm> motms = motmDao.ownCommentsDuringYear(id);

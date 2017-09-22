@@ -18,13 +18,6 @@
 <%@include file="header-admin.jsp"%>
 <body>
 
-
-	<form action="mail" method="post">
-		<input type="submit" name="button1" value="Button 1" />
-	</form>
-
-
-
 	<div id="wrapper">
 
 		<div id="page-wrapper" class="container-fluid">

@@ -64,6 +64,10 @@
 		<canvas id="lineChart"
 			style="height: 450px; width: 800px; padding-left: 0; padding-right: 0; margin-left: auto; margin-right: auto; display: block;"></canvas>
 	</div> 
+	<div>
+		<p style="color:rgba(151,187,205,0);"> Rates of the year</p>
+		<p style="color:rgba(220,220,220,0);"> Your rates</p>
+	</div>
 	</body>
 <%@include file="footer.jsp"%>
 </html>

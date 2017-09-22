@@ -37,33 +37,33 @@ public class ReportAdminServlet extends HttpServlet {
 				int month;
 				int year;
 				
-				//si l'année et le mois ont été pré-choisit
+				//If the year and the month has been initialized
 				if (request.getParameter("month") != null && request.getParameter("year") != null) {
 					month = Integer.parseInt(request.getParameter("month"));
 					year = Integer.parseInt(request.getParameter("year"));
 				} else {
-					//sinon mois précédent choisit par défaut
+					//if not the current month is choose
 					Calendar calendar = Calendar.getInstance();
 					month = calendar.get(Calendar.MONTH);
 					year = calendar.get(Calendar.YEAR);
 				}
 				
-				//Chargement de la liste déroulante
+				//Initisation of the list of months
 				List<DateReport> listMonth = motmDao.chargeAvailableDate();
 				request.getSession().setAttribute("months", listMonth);
 
-				//initialisation de la date
+				//initialisation of the date
 				request.getSession().setAttribute("Date", month + "/" + year);
 
-				//initialisation des notes du mois
+				//initialisation of rates of the month
 				int[] rates = motmDao.rateDuringMonth(month, year);
 
-				if (rates[5] > 0) {//s'il y a des données
-					//Calcul des pourcentage, de la moyenne
+				if (rates[5] > 0) {//if there is data
+					//Calculation of the average and the percentage
 					motmDao.initialisationPourcentRates(request, rates, df);
 					double average = motmDao.calculateAverage(request, rates, df);
 					
-					//initialisation de l'image et des commentaires
+					//initialisation of the picture and comments
 					motmDao.adaptPicture(request, average);
 					List<Motm> motms = motmDao.commentsDuringMonth(month, year);
 					

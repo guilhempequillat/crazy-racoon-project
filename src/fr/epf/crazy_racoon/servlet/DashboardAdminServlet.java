@@ -43,25 +43,23 @@ public class DashboardAdminServlet extends HttpServlet {
 				int month;
 				int year;
 
-				// Initialisation date
+				// Initialisation of the date
 				Calendar calendar = Calendar.getInstance();
 				month = calendar.get(Calendar.MONTH)+1;
 				year = calendar.get(Calendar.YEAR);
-
-				// initialisation des notes du mois
-				int[] rates = motmDao.rateDuringMonth(month, year);
-				
-				//initialisation de la date
 				request.getSession().setAttribute("Date", month + "/" + year);
+
+				// initialisation rates of the month
+				int[] rates = motmDao.rateDuringMonth(month, year);				
 				
-				//initialisation nombre membres et nombre templates
+				//initialisation of the number of members and templates
 				int totalMember = userDao.findAll().size();
 				request.getSession().setAttribute("NumberMember", totalMember);
 				int totalTemplate = templateDao.findAll().size();
 				request.getSession().setAttribute("NumberTemplate", totalTemplate);
 
-				if (rates[5] > 0) {// s'il y a des données
-					// Calcul des pourcentage, de la moyenne
+				if (rates[5] > 0) {//if there is data
+					// Calculation of percentages and average
 					motmDao.initialisationPourcentRates(request, rates, df);
 					double average = motmDao.calculateAverage(request, rates, df);
 				}
