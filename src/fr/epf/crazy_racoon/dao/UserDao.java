@@ -32,6 +32,16 @@ public class UserDao {
 		return em.createQuery("FROM User").getResultList();
 	}
 	
+	public boolean emailIsNotUsed (String email) {
+		List<User> users = findAll();
+		for( int i = 0 ; i< users.size() ; i++ ) {
+			if ( users.get(i).getEmail().equals(email) ) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
 	public void updateOne(String firstName, String lastName, String email, Date d, Long id) {
 		User userEdit =em.find(User.class, id);
 		if(firstName.equals(userEdit.getFirstName())==false){

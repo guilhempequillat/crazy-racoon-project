@@ -77,6 +77,9 @@
 								</form>
 								<form id="register-form" action="register" method="POST"
 									role="form" style="display: none;">
+									<c:if test="${ not empty errorRegister }">
+										<div style = "color : red">${ errorRegister }</div>
+									</c:if>
 									<div class="form-group">
 										<input type="text" name="firstName" placeholder="First Name"
 											id="firstname" class="form-control">
