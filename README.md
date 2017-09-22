@@ -46,7 +46,9 @@ User (employee) :
 2. Select "From a CSV file/Text" in the Data tab
 3. Change the delimiteur by personnalise and choose "$"
 
+## DataBase
 
+We gave you adataBase with some data for improve your online experience 
 
 ## Limits
 
